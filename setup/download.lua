@@ -12,7 +12,11 @@ local files = {
         json = {url = github.."library/json/convert.lua", downloadTo = dir.."library/json/"},
     },
     extension = {
+<<<<<<< HEAD
         jLoader = {url = github.."extension/jLoader.lua", downloadTo = dir.."macros/loader/"},
+=======
+        jLoader = {url = github.."macros/loader/jLoader.lua", downloadTo = dir.."extensions/"},
+>>>>>>> 7e9a01d3089aaaca19d1474c32a574a823a5d1e9
     },
 }
 
