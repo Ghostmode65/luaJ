@@ -45,7 +45,7 @@ Import.download = function(url, saveDirectory) --*.jsMacros/saveDirectory/github
     if not FS:exists(dir) then FS:makeDir(dir) end
 
     local filename = url:match("^.+/(.+)$") 
-    Chat:log("Downloading §d"..filename.."§f to \n§f"..saveDirectory)
+    Chat:log("Downloading §d"..filename.."§f to \n§f.jsMacros/"..saveDirectory)
 
     local URL_Manager = luajava.bindClass("java.net.URL")
     local Files = luajava.bindClass("java.nio.file.Files")

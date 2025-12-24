@@ -67,7 +67,7 @@ end
 hasLaunchGame()
 
 --load jLoader
-local success = pcall(function() dofile(LuaJ.directory.roaming.loader)() end)
+local success = pcall(dofile, LuaJ.directory.roaming.loader)
 if not success then Chat:log("Failed to load Default Library") return nil end
 
 

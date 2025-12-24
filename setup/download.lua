@@ -44,4 +44,4 @@ end
 download()
 
 --might need to add a status check on pcalls (should fail in import)
---Might add a check to see if files exist before downloading
+--Might add better checks to see if files exist before downloading

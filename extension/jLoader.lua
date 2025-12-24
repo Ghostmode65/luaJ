@@ -93,7 +93,7 @@ end
 
 loadLibraries()
 
---test nested folders for libraries
+--get nested folders for libraries to load
 
 --need to set lua option to global
     --could try to edit JsMacros:getConfig().options
