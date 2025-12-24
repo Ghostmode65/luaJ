@@ -1,18 +1,16 @@
-local github = LuaJ.github or nil --luaJ/refs/heads/main/library/main/library/main/import.lua
+local github = LuaJ.github or nil --https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/heads/main/
 if not github then return end
-
-local dir = "scripts/"
 
 local files = {
     main = {
-        import = {url = github.."library/main/import.lua", downloadTo = dir.."library/main/"},
+        import = {url = github.."library/main/import.lua", downloadTo = "scripts/".."library/main/"},
     },
     sub = {
-        roman = {url = github.."library/math/roman.lua", downloadTo = dir.."library/math/"},
-        json = {url = github.."library/json/convert.lua", downloadTo = dir.."library/json/"},
+        roman = {url = github.."library/math/roman.lua", downloadTo = "scripts/".."library/math/"},
+        json = {url = github.."library/json/convert.lua", downloadTo = "scripts/".."library/json/"},
     },
     extension = {
-        jLoader = {url = github.."extension/jLoader.lua", downloadTo = dir.."macros/loader/"},
+        jLoader = {url = github.."extension/jLoader.lua", downloadTo = "scripts/".."macros/loader/"},
     },
 }
 
@@ -31,18 +29,19 @@ if not Import then return nil end
 
 local function download()
     for _, file in pairs(files.main) do
-        Import.download(file.url, file.downloadTo)
+        pcall(function() Import.download(file.url, file.downloadTo) end)
     end
 
     for _, file in pairs(files.sub) do
-        Import.download(file.url, file.downloadTo)
+        pcall(function() Import.download(file.url, file.downloadTo) end)
     end
 
     for _, file in pairs(files.extension) do
-        Import.download(file.url, file.downloadTo)
-    end 
+        pcall(function() Import.download(file.url, file.downloadTo) end)
+    end
 end
 
 download()
 
+--might need to add a status check on pcalls (should fail in import)
 --Might add a check to see if files exist before downloading
