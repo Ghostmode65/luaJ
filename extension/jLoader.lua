@@ -40,31 +40,38 @@ local Setup = {
 
 --Setup directory if doesn't exist
 if not FS:exists(LuaJ.directory.config.unified) then
-        local success, result = pcall(function()
-            dofile(Request:create(Setup.directory):get():text()) end)
+        local success = pcall(dofile,Request:create(Setup.directory):get():text())
         if not success then Chat:log("Failed to setup directory: ".."\n§d"..Setup.directory) return nil end
 end
 
 --Setup extensions if they don't exist otherwise load them
 if not FS:exists(LuaJ.directory.roaming.extensions.."/DefaultLibrary.lua") then
-    local success, result = pcall(function()
-        dofile(Request:create(Setup.download):get():text()) end)
+    local success = pcall(dofile, Request:create(Setup.download):get():text())
     if not success then Chat:log("Failed to download Default Library: ".."\n§d"..Setup.download) return nil end
 else
-    local success, result = pcall(function()
-        dofile(LuaJ.directory.roaming.extensions.."/DefaultLibrary.lua")
-    end)
-
-    if not success then
-        Chat:log("Failed to load Default Library")
-    return nil end
+    local success = pcall(dofile(), LuaJ.directory.roaming.extensions.."/DefaultLibrary.lua")
+    if not success then Chat:log("Failed to load Default Library") return nil end
 end
 
---Setup config if jLoader is not in config.json
 
+local hasLaunchGame = function ()
+    local tiggers = JsMacros:getProfile():getRegistry():getScriptTriggers()
 
+    for i,v in pairs(tiggers) do
+        if tostring(v.triggerType) == "EVENT" and v.event == "LaunchGame" and v.scriptFile  then
+            return true
+    end end
+    
+    local success = pcall(dofile, Request:create(Setup.config):get():text())
+    if not success then Chat:log("Failed to setup config: ".."\n§d"..Setup.config) return nil end
+end
 
---shorten pcalls
+hasLaunchGame()
+
+--need to set lua option to global
+    --could try to edit JsMacros:getConfig().options
+    ---might need to do it in js
+    ---edit the config file in table from the json directly
 
 --should all libraries by loaded by default?
     --or should all extensions be loaded by default?
