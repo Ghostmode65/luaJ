@@ -41,7 +41,7 @@ Import.download = function(url, saveDirectory) --*.jsMacros/saveDirectory/github
     local valid = pcall(function() Request:create(url):get() return true end)
     if not valid then Chat:log("Invalid URL".."\n§d"..url) return nil end
 
-    local dir = LuaJ.directory.roaming[".jsMacros/"]..saveDirectory
+    local dir = LuaJ.directory.roaming[".jsMacros"]..saveDirectory
     if not FS:exists(dir) then FS:makeDir(dir) end
 
     local filename = url:match("^.+/(.+)$") 

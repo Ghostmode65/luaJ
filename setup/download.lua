@@ -40,8 +40,7 @@ local function download()
 
     for _, file in pairs(files.extension) do
         Import.download(file.url, file.downloadTo)
-    end
-    
+    end 
 end
 
 download()
