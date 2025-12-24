@@ -1,19 +1,5 @@
 local directory = {}
-
-directory.getRoaming = function()
-    if GlobalVars:getString(".roaming") then return GlobalVars:getString(".roaming") end
-
-        local File = luajava.bindClass("java.io.File");
-        local System = luajava.bindClass("java.lang.System");
-        local roaming = Reflection:newInstance(
-            File,
-                {System:getenv("APPDATA")}
-        )
-        GlobalVars:putString(".roaming",roaming:getAbsolutePath())
-        return roaming:getAbsolutePath();
-end
-
-local _jsMacros = directory.getRoaming().."/.jsMacros/"
+local _jsMacros = LuaJ.getRoaming().."/.jsMacros/"
 
 directory.setupFolders = function()
         local dirc = { --/roaming/.jsmacros/
