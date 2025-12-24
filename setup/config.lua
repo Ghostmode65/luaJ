@@ -6,7 +6,7 @@ local trigger = Reflection:newInstance(
     {
         TriggerType.event,
         "LaunchGame",
-        FS:open("unified/extensions/jLoader.lua"):getFile(),
+        FS:open("unified/loader/jLoader.lua"):getFile(),
         true,
         false
     }

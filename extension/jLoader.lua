@@ -87,3 +87,4 @@ loadLibraries()
 
 
 
+--Rename library to globals?
