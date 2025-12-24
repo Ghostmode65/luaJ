@@ -5,14 +5,14 @@ local dir = "scripts/"
 
 local files = {
     main = {
-        import = {url = github.."/library/main/import.lua", downloadTo = dir.."library/main/"},
+        import = {url = github.."library/main/import.lua", downloadTo = dir.."library/main/"},
     },
     sub = {
-        roman = {url = github.."/library/math/roman.lua", downloadTo = dir.."library/math/"},
-        json = {url = github.."/library/json/convert.lua", downloadTo = dir.."library/json/"},
+        roman = {url = github.."library/math/roman.lua", downloadTo = dir.."library/math/"},
+        json = {url = github.."library/json/convert.lua", downloadTo = dir.."library/json/"},
     },
     extension = {
-        jLoader = {url = github.."/macros/loader/jLoader.lua", downloadTo = dir.."extensions/"},
+        jLoader = {url = github.."extension/jLoader.lua", downloadTo = dir.."macros/loader/"},
     },
 }
 
