@@ -1,4 +1,5 @@
-if not LuaJ then
+if LuaJ then goto skip end
+
 LuaJ = {
     github = "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/heads/main/",
 }
@@ -35,7 +36,7 @@ LuaJ.directory  =  {
     }
 }
 
-end
+::skip::
 
 --Relink unified folder if missing 
 if not FS:exists(LuaJ.directory.config.unified) then
