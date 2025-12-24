@@ -38,21 +38,18 @@ local Setup = {
     config = LuaJ.github.."setup/config.lua",
 }
 
+
 --Setup directory if doesn't exist
 if not FS:exists(LuaJ.directory.config.unified) then
         local success = pcall(function() load(Request:create(Setup.directory):get():text())() end)
         if not success then Chat:log("Failed to setup directory: ".."\n§d"..Setup.directory) return nil end
 end
 
---Setup extensions if they don't exist otherwise load them
+--Setup extensions if they don't exist
 if not FS:exists(LuaJ.directory.roaming.extensions.."/jLoader.lua") then
     local success = pcall(function() load(Request:create(Setup.download):get():text())() end)
     if not success then Chat:log("Failed to download loader: ".."\n§d"..Setup.download) return nil end
-else
-    local success = pcall(function() dofile(LuaJ.directory.roaming.extensions.."/jLoader.lua")() end)
-    if not success then Chat:log("Failed to load Default Library") return nil end
 end
-
 
 local hasLaunchGame = function ()
     local tiggers = JsMacros:getProfile():getRegistry():getScriptTriggers()
@@ -67,5 +64,9 @@ local hasLaunchGame = function ()
 end
 
 hasLaunchGame()
+
+--load jLoader
+local success = pcall(function() dofile(LuaJ.directory.roaming.extensions.."/jLoader.lua")() end)
+if not success then Chat:log("Failed to load Default Library") return nil end
 
 

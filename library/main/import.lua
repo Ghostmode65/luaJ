@@ -38,8 +38,10 @@ Import.file = function(file,doCache) --##Include file path in file, Starts at ro
 end
 
 Import.download = function(url, saveDirectory) --*.jsMacros/saveDirectory/github filename
-    local _jsmacros = GlobalVars:get(".roaming") .. "/.jsMacros/"
-    local dir = _jsmacros..saveDirectory
+    local valid = pcall(Request:create(url):get())
+    if not valid then Chat:log("Invalid URL".."\n§d"..url) return nil end
+
+    local dir = LuaJ.directory.roaming[".jsMacros/"]..saveDirectory
     if not FS:exists(dir) then FS:makeDir(dir) end
 
     local filename = url:match("^.+/(.+)$") --improve regex for to get filename
