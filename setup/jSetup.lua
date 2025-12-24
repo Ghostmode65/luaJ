@@ -38,7 +38,6 @@ local Setup = {
     config = LuaJ.github.."setup/config.lua",
 }
 
-
 --Setup directory if doesn't exist
 if not FS:exists(LuaJ.directory.config.unified) then
         local success = pcall(function() load(Request:create(Setup.directory):get():text())() end)

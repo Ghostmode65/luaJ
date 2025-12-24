@@ -2,7 +2,7 @@ local _Env = {
     Import_Cache = {},
 }
 
-Import = {} --Might rename later, this executes the scripts, import makes it sound like its load
+Import = {} 
 
 Import.url = function(url,doCache)
     if not url or type(url) ~= "string" then Chat:log("url not a string".."\n§d"..tostring(url)) return nil end
@@ -44,7 +44,7 @@ Import.download = function(url, saveDirectory) --*.jsMacros/saveDirectory/github
     local dir = LuaJ.directory.roaming[".jsMacros/"]..saveDirectory
     if not FS:exists(dir) then FS:makeDir(dir) end
 
-    local filename = url:match("^.+/(.+)$") --improve regex for to get filename
+    local filename = url:match("^.+/(.+)$") 
     Chat:log("Downloading §d"..filename.."§f to \n§f"..saveDirectory)
 
     local URL_Manager = luajava.bindClass("java.net.URL")
@@ -65,3 +65,7 @@ Import.download = function(url, saveDirectory) --*.jsMacros/saveDirectory/github
     )
     return filename
 end
+
+
+--Might rename later, this executes the scripts, import makes it sound like its load
+--Import.download -> improve regex to get filename

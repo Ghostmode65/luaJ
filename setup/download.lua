@@ -1,11 +1,7 @@
-
-
-
 local github = LuaJ.github or nil
 if not github then return end
 
 local dir = "scripts/"
-
 
 local files = {
     main = {
@@ -13,6 +9,7 @@ local files = {
     },
     sub = {
         roman = {url = github.."/library/math/roman.lua", downloadTo = dir.."library/math/"},
+        json = {url = github.."/library/json/convert.lua", downloadTo = dir.."library/json/"},
     },
     extension = {
         jLoader = {url = github.."/extension/jLoader.lua", downloadTo = dir.."extensions/"},
@@ -28,7 +25,6 @@ local function load_mainLibrary()
         if not success then Chat:log("§cUrl failed to load: ".."\n§d"..file.url) return nil end
     end
 end
-
 
 load_mainLibrary()
 if not Import then return nil end
