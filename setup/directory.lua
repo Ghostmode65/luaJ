@@ -59,9 +59,6 @@ directory.unfiyFolder = function (delete)
     end
 end
 
-local status, err = pcall(directory.getRoaming)
-if not status then Chat:log("§cError getting roaming path") end
-
 local status, err = pcall(directory.setupFolders)
 if not status then Chat:log("§cError setting up folders") end
 

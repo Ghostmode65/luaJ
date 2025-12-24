@@ -14,7 +14,6 @@ local files = {
         roman = {url = github.."/library/math/roman.lua", downloadTo = dir.."library/math/"},
     },
     extension = {
-        defaultLibrary = {url = github.."/extension/defaultLibrary.lua", downloadTo = dir.."extensions/"},
         jLoader = {url = github.."/extension/jLoader.lua", downloadTo = dir.."extensions/"},
     },
 }

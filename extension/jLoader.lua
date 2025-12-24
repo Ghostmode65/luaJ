@@ -32,48 +32,52 @@ LuaJ.directory  =  {
     }
 }
 
-local Setup = {
-    directory = LuaJ.github.."setup/directory.lua",
-    download = LuaJ.github.."setup/download.lua",
-    config = LuaJ.github.."setup/config.lua",
-}
+--add something to relink the unified folder if unlinked
 
---Setup directory if doesn't exist
-if not FS:exists(LuaJ.directory.config.unified) then
-        local success = pcall(load,Request:create(Setup.directory):get():text())
-        if not success then Chat:log("Failed to setup directory: ".."\n§d"..Setup.directory) return nil end
+local loadLibraries = function()
+    local folders = FS:list(LuaJ.directory.roaming.library)
+    local library = {}
+
+    local loadfile = function(path,filename)
+        local success = pcall(dofile, path..filename)
+        if not success then Chat:log("Failed to load library: ".."\n§d"..filename) return nil end
+    end
+
+    library.nest = function(folder)
+        for _,filename in pairs(FS:list(LuaJ.directory.roaming.library.."/"..folder.."/")) do
+            local path = LuaJ.directory.roaming.library.."/"..folder.."/"
+            if filename:sub(-4) == ".lua" then loadfile(path, filename)
+            else library.nest(filename) end
+        end
+        
+    end
+
+   library.main = function()
+        local files = FS:list(LuaJ.directory.roaming.library.."/main/")
+        for _,filename in pairs(files) do
+            library.nest("main/"..filename)
+        end
+   end
+
+    library.sub = function()
+        for _,folder in pairs(folders) do
+            if folder ~= "main" then library.nest(folder) end
+        end
+    end
+
+
+   library.main()
+   library.sub()
+
 end
 
---Setup extensions if they don't exist otherwise load them
-if not FS:exists(LuaJ.directory.roaming.extensions.."/DefaultLibrary.lua") then
-    local success = pcall(load, Request:create(Setup.download):get():text())
-    if not success then Chat:log("Failed to download Default Library: ".."\n§d"..Setup.download) return nil end
-else
-    local success = pcall(dofile(), LuaJ.directory.roaming.extensions.."/DefaultLibrary.lua")
-    if not success then Chat:log("Failed to load Default Library") return nil end
-end
-
-
-local hasLaunchGame = function ()
-    local tiggers = JsMacros:getProfile():getRegistry():getScriptTriggers()
-
-    for i,v in pairs(tiggers) do
-        if tostring(v.triggerType) == "EVENT" and v.event == "LaunchGame" and v.scriptFile  then
-            return true
-    end end
-    
-    local success = pcall(load, Request:create(Setup.config):get():text())
-    if not success then Chat:log("Failed to setup config: ".."\n§d"..Setup.config) return nil end
-end
-
-hasLaunchGame()
+loadLibraries()
 
 --need to set lua option to global
     --could try to edit JsMacros:getConfig().options
     ---might need to do it in js
     ---edit the config file in table from the json directly
+    
 
---move most of the setup to one file and only ran once when installer is ran. (execpt for linking the unified folder, sometimes unlinked)
 
---should all libraries by loaded by default?
-    --or should all extensions be loaded by default?
+
