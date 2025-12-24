@@ -21,3 +21,5 @@ local success, result = pcall(function()
 end
 
 --Import.download() the main library files from github
+--Make a table of files to download and their paths
+--Check if they exist, if not download them

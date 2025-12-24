@@ -16,7 +16,7 @@ end
 local _jsMacros = directory.getRoaming().."/.jsMacros/"
 
 directory.setupFolders = function()
-        local directory = { --/roaming/.jsmacros/
+        local dirc = { --/roaming/.jsmacros/
             scripts = {
                 library = {},
                 extensions = {},
@@ -43,7 +43,7 @@ directory.setupFolders = function()
         end
     end
 
-    makeDirectories(directory)
+    makeDirectories(dirc)
 end
 
 directory.unfiyFolder = function (delete)

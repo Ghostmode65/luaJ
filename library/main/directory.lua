@@ -1,8 +1,8 @@
 
-local roaming = GlobalVars:get(".roaming")
+local roaming = LuaJ.getRoaming()
 
 
-LuaJ.Folders  =  {
+LuaJ.directory  =  {
     roaming = {
         folder = roaming,
         jsmacros = roaming.. "/.jsMacros/",
