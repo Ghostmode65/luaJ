@@ -56,12 +56,13 @@ local loadLibraries = function()
     end
 
     library.nest = function(folder)
-        for _,filename in pairs(FS:list(LuaJ.directory.roaming.library.."/"..folder.."/")) do
+        local files = FS:list(LuaJ.directory.roaming.library.."/"..folder)
+        if not files then return nil end
+        for _,filename in pairs(files) do
             local path = LuaJ.directory.roaming.library.."/"..folder.."/"
             if filename:sub(-4) == ".lua" then loadfile(path, filename)
             else library.nest(filename) end
         end
-        
     end
 
    library.main = function()
@@ -85,12 +86,11 @@ end
 
 loadLibraries()
 
+--test nested folders for libraries
+
 --need to set lua option to global
     --could try to edit JsMacros:getConfig().options
     ---might need to do it in js
     ---edit the config file in table from the json directly
     
-
-
-
 --Rename library to globals?
