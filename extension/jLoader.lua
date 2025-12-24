@@ -68,7 +68,8 @@ local loadLibraries = function()
         for _,filename in pairs(files) do
             local path = LuaJ.directory.roaming.library.."/"..folder.."/"
             if filename:sub(-4) == ".lua" then loadfile(path, filename)
-            else library.nest(filename) end
+                elseif FS:isDir(path..filename) then --does this gurantee it's a folder?
+            library.nest(folder.."/"..filename) end
         end
     end
 
@@ -92,8 +93,6 @@ local loadLibraries = function()
 end
 
 loadLibraries()
-
---get nested folders for libraries to load
 
 --need to set lua option to global
     --could try to edit JsMacros:getConfig().options
