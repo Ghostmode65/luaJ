@@ -14,3 +14,4 @@ local trigger = Reflection:newInstance(
 JsMacros:getProfile():getRegistry():addScriptTrigger(trigger);
 
 
+--Remove installer trigger after setup

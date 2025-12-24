@@ -40,13 +40,13 @@ local Setup = {
 
 --Setup directory if doesn't exist
 if not FS:exists(LuaJ.directory.config.unified) then
-        local success = pcall(dofile,Request:create(Setup.directory):get():text())
+        local success = pcall(load,Request:create(Setup.directory):get():text())
         if not success then Chat:log("Failed to setup directory: ".."\n§d"..Setup.directory) return nil end
 end
 
 --Setup extensions if they don't exist otherwise load them
 if not FS:exists(LuaJ.directory.roaming.extensions.."/DefaultLibrary.lua") then
-    local success = pcall(dofile, Request:create(Setup.download):get():text())
+    local success = pcall(load, Request:create(Setup.download):get():text())
     if not success then Chat:log("Failed to download Default Library: ".."\n§d"..Setup.download) return nil end
 else
     local success = pcall(dofile(), LuaJ.directory.roaming.extensions.."/DefaultLibrary.lua")
@@ -62,7 +62,7 @@ local hasLaunchGame = function ()
             return true
     end end
     
-    local success = pcall(dofile, Request:create(Setup.config):get():text())
+    local success = pcall(load, Request:create(Setup.config):get():text())
     if not success then Chat:log("Failed to setup config: ".."\n§d"..Setup.config) return nil end
 end
 
@@ -72,6 +72,8 @@ hasLaunchGame()
     --could try to edit JsMacros:getConfig().options
     ---might need to do it in js
     ---edit the config file in table from the json directly
+
+--move most of the setup to one file and only ran once when installer is ran. (execpt for linking the unified folder, sometimes unlinked)
 
 --should all libraries by loaded by default?
     --or should all extensions be loaded by default?
