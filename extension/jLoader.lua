@@ -25,10 +25,12 @@ LuaJ.directory  =  {
         library = roaming.. "/.jsMacros/scripts/library",
         extensions = roaming.. "/.jsMacros/scripts/extensions",
         macros = roaming.. "/.jsMacros/scripts/Macros",
+        loader = roaming.. "/.jsMacros/scripts/Macros/loader/jLoader.lua",
     },
     config = {
         folder = configFolder,
-        unified = configFolder.."/unified",
+        macros = configFolder.."/Macros",
+        unified = configFolder.."/Macros/unified",
     }
 }
 
