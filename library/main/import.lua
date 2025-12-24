@@ -38,7 +38,7 @@ Import.file = function(file,doCache) --##Include file path in file, Starts at ro
 end
 
 Import.download = function(url, saveDirectory) --*.jsMacros/saveDirectory/github filename
-    local valid = pcall(Request:create(url):get())
+    local valid = pcall(function() Request:create(url):get() return true end)
     if not valid then Chat:log("Invalid URL".."\n§d"..url) return nil end
 
     local dir = LuaJ.directory.roaming[".jsMacros/"]..saveDirectory
@@ -66,6 +66,7 @@ Import.download = function(url, saveDirectory) --*.jsMacros/saveDirectory/github
     return filename
 end
 
+--
 
 --Might rename later, this executes the scripts, import makes it sound like its load
 --Import.download -> improve regex to get filename
