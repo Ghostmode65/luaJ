@@ -13,5 +13,5 @@ local trigger = Reflection:newInstance(
 )
 JsMacros:getProfile():getRegistry():addScriptTrigger(trigger);
 
-
+--need to check if jLoader exists otherwise it throws error
 --Remove installer trigger after setup
