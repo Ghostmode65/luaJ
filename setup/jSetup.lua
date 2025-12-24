@@ -47,7 +47,7 @@ if not FS:exists(LuaJ.directory.config.unified) then
 end
 
 --Setup extensions if they don't exist
-if not FS:exists(LuaJ.directory.roaming.loader.."/jLoader.lua") then
+if not FS:exists(LuaJ.directory.roaming.loader) then
     local success = pcall(function() return load(Request:create(Setup.download):get():text())() end)
     if not success then Chat:log("Failed to download loader: ".."\n§d"..Setup.download) return nil end
 end
@@ -67,7 +67,7 @@ end
 hasLaunchGame()
 
 --load jLoader
-local success = pcall(function() dofile(LuaJ.directory.roaming.extensions.."/jLoader.lua")() end)
+local success = pcall(function() dofile(LuaJ.directory.roaming.loader)() end)
 if not success then Chat:log("Failed to load Default Library") return nil end
 
 
