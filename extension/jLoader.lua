@@ -32,7 +32,13 @@ LuaJ.directory  =  {
     }
 }
 
---add something to relink the unified folder if unlinked
+--Relink unified folder if missing 
+if not FS:exists(LuaJ.directory.config.unified) then
+    local url = LuaJ.github.."setup/directory.lua"
+    local success = pcall(function() load(Request:create(url):get():text())() end)
+    if not success then Chat:log("Failed to setup directory: ".."\n§d"..url) return nil end
+end
+
 
 local loadLibraries = function()
     local folders = FS:list(LuaJ.directory.roaming.library)

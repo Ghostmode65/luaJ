@@ -50,4 +50,4 @@ end
 
 download()
 
---Might add a check to see if files exist before downloading, but for now if you want to override my global try a different fucken name
+--Might add a check to see if files exist before downloading

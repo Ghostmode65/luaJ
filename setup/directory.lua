@@ -33,8 +33,8 @@ directory.setupFolders = function()
 end
 
 directory.unfiyFolder = function (delete)
-        local instancePath = JsMacros:getConfig().configFolder:getPath().."/macros/unified"
-        local unifyPath = _jsMacros.."scripts/macros"
+        local instancePath = LuaJ.directory.config.unified
+        local unifyPath = LuaJ.directory.roaming.scripts.macros
 
     local Runtime = luajava.bindClass("java.lang.Runtime");
     local File = luajava.bindClass("java.io.File");
