@@ -7,14 +7,19 @@
 local github = LuaJ.github or nil
 if not github then return end
 
+local dir = "scripts/"
+
 local files = {
     main = {
-        import = {url = github.."/library/main/import.lua", downloadTo = "scripts/library/main/"},
-        directory = {url = github.."library/main/import.lua", downloadTo = "scripts/library/main/"},
+        import = {url = github.."/library/main/import.lua", downloadTo = dir.."library/main/"},
     },
     sub = {
-        roman = {url = github.."/library/math/roman.lua", downloadTo = "scripts/library/math/"},
-    }
+        roman = {url = github.."/library/math/roman.lua", downloadTo = dir.."library/math/"},
+    },
+    extension = {
+        defaultLibrary = {url = github.."/extension/defaultLibrary.lua", downloadTo = dir.."extensions/"},
+        jLoader = {url = github.."/extension/jLoader.lua", downloadTo = dir.."extensions/"},
+    },
 }
 
 local function load_mainLibrary()
@@ -31,7 +36,7 @@ end
 load_mainLibrary()
 if not Import then return nil end
 
-local function download_Library()
+local function download()
     for _, file in pairs(files.main) do
         Import.download(file.url, file.downloadTo)
     end
@@ -39,8 +44,13 @@ local function download_Library()
     for _, file in pairs(files.sub) do
         Import.download(file.url, file.downloadTo)
     end
+
+    for _, file in pairs(files.extension) do
+        Import.download(file.url, file.downloadTo)
+    end
+    
 end
 
---add extension to load default library
+download()
 
 --Might add a check to see if files exist before downloading, but for now if you want to override my global try a different fucken name

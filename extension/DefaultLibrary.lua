@@ -3,10 +3,10 @@ local dir = LuaJ.getRoaming()..".jsMacros/scripts/library/"
 local library = {
     main ={
         import = {file = "import.lua"},
-        directory = {file = "directory.lua"},
     },
         sub = {
             math = {file = "math.lua",folder = "math"},
+            json = {file = "default.lua", folder = "json"}
         }
   
 }
