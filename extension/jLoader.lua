@@ -1,3 +1,4 @@
+if not LuaJ then
 LuaJ = {
     github = "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/heads/main/",
 }
@@ -33,6 +34,8 @@ LuaJ.directory  =  {
         unified = configFolder.."/Macros/unified",
     }
 }
+
+end
 
 --Relink unified folder if missing 
 if not FS:exists(LuaJ.directory.config.unified) then
