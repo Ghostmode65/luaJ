@@ -4,22 +4,42 @@
     ---might need to do it in js
     ---edit the config file in table from the json directly
 
+local github = LuaJ.github or nil
+if not github then return end
 
-
-
-local urls = {
-    paths = "https://raw.githubusercontent.com/Ghostmode65/mclib/refs/heads/main/luaj/library/main/paths.lua",
-    import = "https://raw.githubusercontent.com/Ghostmode65/mclib/refs/heads/main/luaj/library/main/import.lua",
+local files = {
+    main = {
+        import = {url = github.."/library/main/import.lua", downloadTo = "scripts/library/main/"},
+        directory = {url = github.."library/main/import.lua", downloadTo = "scripts/library/main/"},
+    },
+    sub = {
+        roman = {url = github.."/library/math/roman.lua", downloadTo = "scripts/library/math/"},
+    }
 }
 
-for key, url in pairs(urls) do
-local success, result = pcall(function()
-        local script = load(Request:create(url):get():text())
-            return script and script() or nil
-        end)
-    if not success then Chat:log("§cUrl failed to load: ".."\n§d"..url) return nil end
+local function load_mainLibrary()
+    for _, file in pairs(files.main) do
+    local success, result = pcall(function()
+            local script = load(Request:create(file.url):get():text())
+                return script and script() or nil
+            end)
+        if not success then Chat:log("§cUrl failed to load: ".."\n§d"..file.url) return nil end
+    end
 end
 
---Import.download() the main library files from github
---Make a table of files to download and their paths
---Check if they exist, if not download them
+
+load_mainLibrary()
+if not Import then return nil end
+
+local function download_Library()
+    for _, file in pairs(files.main) do
+        Import.download(file.url, file.downloadTo)
+    end
+
+    for _, file in pairs(files.sub) do
+        Import.download(file.url, file.downloadTo)
+    end
+end
+
+
+--Might add a check to see if files exist before downloading, but for now if you want to override my global try a different fucken name

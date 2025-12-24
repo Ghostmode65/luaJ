@@ -1,4 +1,6 @@
-LuaJ = {}
+LuaJ = {
+    github = "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/heads/main/",
+}
 
 LuaJ.getRoaming = function()
     if GlobalVars:getString(".roaming") then return GlobalVars:getString(".roaming") end

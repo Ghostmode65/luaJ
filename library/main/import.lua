@@ -8,7 +8,6 @@ Import.url = function(url,doCache)
     if not url or type(url) ~= "string" then Chat:log("url not a string".."\n§d"..tostring(url)) return nil end
     if doCache and _Env.Import_Cache[url] then return _Env.Import_Cache[url] end
 
-    
     local success, result = pcall(function()
         local script = load(Request:create(url):get():text())
             return script and script() or nil
@@ -37,7 +36,6 @@ Import.file = function(file,doCache) --##Include file path in file, Starts at ro
     if doCache then _Env.Import_Cache[file] = result end
     return result
 end
-
 
 Import.download = function(url, saveDirectory) --*.jsMacros/saveDirectory/github filename
     local _jsmacros = GlobalVars:get(".roaming") .. "/.jsMacros/"
