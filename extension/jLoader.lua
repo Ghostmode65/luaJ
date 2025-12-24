@@ -1,4 +1,5 @@
-if LuaJ then goto skip end
+local loaded
+if LuaJ then loaded = true goto skip end
 
 LuaJ = {
     github = "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/heads/main/",
@@ -17,8 +18,12 @@ LuaJ.getRoaming = function()
         return roaming:getAbsolutePath();
 end
 
+::skip::
+
 local roaming = LuaJ.getRoaming()
 local configFolder = JsMacros:getConfig().configFolder:getPath()
+
+if loaded then goto skip2 end
 
 LuaJ.directory  =  {
     roaming = {
@@ -36,7 +41,9 @@ LuaJ.directory  =  {
     }
 }
 
-::skip::
+loaded = true
+
+::skip2::
 
 --Relink unified folder if missing 
 if not FS:exists(LuaJ.directory.config.unified) then

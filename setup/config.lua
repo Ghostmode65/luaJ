@@ -17,3 +17,4 @@ local trigger = Reflection:newInstance(
 JsMacros:getProfile():getRegistry():addScriptTrigger(trigger);
 
 --Remove installer trigger after setup
+    --look into getting the file name of the scripts that was called
