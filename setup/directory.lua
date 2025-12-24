@@ -34,9 +34,9 @@ directory.setupFolders = function()
     makeDirectories(dirc)
 end
 
-directory.unfiyFolder = function (delete)
+directory.unfiyFolder = function(delete)
         local instancePath = LuaJ.directory.config.unified
-        local unifyPath = LuaJ.directory.roaming.scripts.macros
+        local unifyPath = LuaJ.directory.roaming.macros
 
     local Runtime = luajava.bindClass("java.lang.Runtime");
     local File = luajava.bindClass("java.io.File");

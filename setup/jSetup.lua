@@ -46,7 +46,7 @@ end
 
 --Setup extensions if they don't exist
 if not FS:exists(LuaJ.directory.roaming.extensions.."/jLoader.lua") then
-    local success = pcall(function() load(Request:create(Setup.download):get():text())() end)
+    local success = pcall(function() return load(Request:create(Setup.download):get():text())() end)
     if not success then Chat:log("Failed to download loader: ".."\n§d"..Setup.download) return nil end
 end
 
