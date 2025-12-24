@@ -43,7 +43,7 @@ directory.unfiyFolder = function (delete)
         File,
             {instancePath}
     )
-    if junctionDir:exists() and delete then junctionDir:delete() else return true end
+    if (junctionDir:exists() and delete) then junctionDir:delete() elseif (junctionDir:exists() and not delete) then return true end
 
     os.execute('cmd /c rmdir "' .. instancePath .. '" >nul 2>&1')
     local exitCode = os.execute(
