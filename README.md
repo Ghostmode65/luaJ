@@ -5,6 +5,7 @@ Easily setup up Lua with 1 script no matter the instance.
 | ✅ | Features |
 |---|---|
 | ☑️ | Auto installs the lua extension for JsMacros |
+| ☑️ | Turns on Shared Global Context |
 | ☑️ | Creates one shared folder for all launchers, all your scripts will be available on feather, lunar, prism, vanilla, and more. |
 | ☑️ | Loads libraries and globals on game launch |
 
