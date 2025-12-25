@@ -72,3 +72,7 @@ if not success then Chat:log("Failed to load Default Library") return nil end
 
 
 Chat:log("§a☻ LuaJ Setup Complete ☻")
+
+
+--Currently the installer sets useGlobalContext to true by altering the json.
+--I have the reference class (xyz.wagyourtail.jsmacros.luaj.config.LuajConfig.useGlobalContext) but will need to get the instance of the config later.

@@ -93,8 +93,3 @@ local loadLibraries = function()
 end
 
 loadLibraries()
-
---need to set lua option to global
-    --could try to edit JsMacros:getConfig().options
-    ---might need to do it in js
-    ---edit the config file in table from the json directly

@@ -9,6 +9,26 @@ Installer.runLuaSetup = () => {
     }
 }
 
+Installer.editConfig = () => {
+    const configFile = JsMacros.getConfig().configFolder.getPath() + "\\options.json";
+    let configContent = FS.open(configFile).read();
+    
+    let config = JSON.parse(configContent);
+    
+    // Check if useGlobalContext is false and set it to true
+    if (config.lua && config.lua.useGlobalContext === false) {
+        Chat.log("Set useGlobalContext to §etrue");
+        config.lua.useGlobalContext = true;
+    
+        const updatedContent = JSON.stringify(config, null, 2);
+        FS.open(configFile).write(updatedContent);
+    
+        return true;
+    }
+    
+    return false;
+}
+
 Installer.lua = () => { //Downloads lua if not installed
     const url = "https://github.com/JsMacros/JsMacros-Lua/releases/download/1.2.2/" + lua; 
     const dir = JsMacros.getConfig().configFolder.getPath() + "\\LanguageExtensions\\"; 
@@ -38,11 +58,13 @@ Installer.lua = () => { //Downloads lua if not installed
             JsMacros.runScript('lua', 'Chat:actionbar("§dLua Extension Loaded")'); return true;
         } catch (error) {
             Chat.log("§dError loading lua: " + error);
+            return false;
         }
     }
     return true;
 };
 
 if (Installer.lua()) {
+    Installer.editConfig();
     Installer.runLuaSetup()
 }
