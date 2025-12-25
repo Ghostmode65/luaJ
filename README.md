@@ -1,5 +1,7 @@
 # Luaj
 
+Easily setup up Lua with 1 script no matter the instance.
+
 | ✅ | Features |
 |---|---|
 | ☑️ | Auto installs the lua extension for JsMacros |
