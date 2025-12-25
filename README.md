@@ -14,7 +14,7 @@ Easily setup up Lua with 1 script no matter the instance.
 |-----------------|-----------|------|
 | **Import** | `download(url, saveDirectory)`<br>`file(path, cache)`<br>`url(url, cache)` |`Import.file` and `Import.url` execute the script<br>Similar to `loadstring(Http)()` |
 | **Json** | `encode(table)`<br>`decode(string)` | `encode` returns a string<br>`decode` returns a table |
-| **Math (Roman Numerals)** | `roman.ToRoman(number)`<br>`roman.ToNumber(string)` |  |
+| **Math (Roman Numerals)** | `math.roman.ToRoman(number)`<br>`math.roman.ToNumber(string)` |  |
 
 Shared folder is created in `roaming/.jsMacros/`
 It will show up in your macro folder as `unified` 
