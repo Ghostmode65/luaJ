@@ -21,4 +21,4 @@ It will show up in your macro folder as `unified`
 
 **⚠️This is still in development**     
 • This does not work on linux (yet)   
-• Need to set lua option to global. Open Jsmacros -> Settings -> Language -> LuaJ -> Make sure Shared Global Context is checked. (This will be automated soon)
+• Need to set lua Global Context to true manully. Open Jsmacros -> Settings -> Language -> LuaJ -> Make sure Shared Global Context is checked. (This will be automated soon)
