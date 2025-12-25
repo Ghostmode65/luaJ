@@ -2,7 +2,7 @@ local _Env = {
     Import_Cache = {},
 }
 
-Import = {} 
+Import = {} --The name isn't the best, but you can already do most similar things with lua 
 
 Import.url = function(url,doCache)
     if not url or type(url) ~= "string" then Chat:log("url not a string".."\n§d"..tostring(url)) return nil end
@@ -66,7 +66,5 @@ Import.download = function(url, saveDirectory) --*.jsMacros/saveDirectory/github
     return filename
 end
 
---
 
---Might rename later, this executes the scripts, import makes it sound like its load
 --Import.download -> improve regex to get filename

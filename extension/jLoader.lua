@@ -98,5 +98,3 @@ loadLibraries()
     --could try to edit JsMacros:getConfig().options
     ---might need to do it in js
     ---edit the config file in table from the json directly
-    
---Rename library to globals?
