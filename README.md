@@ -2,7 +2,7 @@
 
 | ✅ | Features |
 |---|---|
-| ☑️ | Auto installs the lua extension to your instance |
+| ☑️ | Auto installs the lua extension for JsMacros |
 | ☑️ | Creates one shared folder for all launchers, all your scripts will be available on feather, lunar, prism, vanilla, and more. |
 | ☑️ | Loads libraries and globals on game launch |
 
