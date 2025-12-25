@@ -7,8 +7,9 @@
 | ☑️ | Loads libraries and globals on game launch |
 
 
-| Default Library | Functions |
-|--------|-----------|
-| **Import** | `download(url, saveDirectory)`<br>`file(path, cache)`<br>`url(url, cache)` |
-| **Json** | `encode(table)`<br>`decode(string)` |
-| **Math (Roman Numerals)** | `roman.ToRoman(number)`<br>`roman.ToNumber(string)` |
+| Default Library | Functions | Info |
+|-----------------|-----------|------|
+| **Import** | `download(url, saveDirectory)`<br>`file(path, cache)`<br>`url(url, cache)` |`Import.file` and `Import.url` execute the script<br>Similar to `loadstring(Http)()` |
+| **Json** | `encode(table)`<br>`decode(string)` | `encode` returns a string<br>`decode` returns a table |
+| **Math (Roman Numerals)** | `roman.ToRoman(number)`<br>`roman.ToNumber(string)` |  |
+
