@@ -17,5 +17,5 @@ Shared folder is created in `roaming/.jsMacros/`
 It will show up in your macro folder as `unified` 
 
 
-**⚠️This is still in development **
--This does not work on linux yet
+**⚠️This is still in development **     
+• This does not work on linux (yet)
