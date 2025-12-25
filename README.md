@@ -1,8 +1,10 @@
 # Luaj
 
+Easily setup up Lua with 1 script no matter the instance.
+
 | ✅ | Features |
 |---|---|
-| ☑️ | Auto installs the lua extension to your instance |
+| ☑️ | Auto installs the lua extension for JsMacros |
 | ☑️ | Creates one shared folder for all launchers, all your scripts will be available on feather, lunar, prism, vanilla, and more. |
 | ☑️ | Loads libraries and globals on game launch |
 
@@ -17,5 +19,5 @@ Shared folder is created in `roaming/.jsMacros/`
 It will show up in your macro folder as `unified` 
 
 
-**⚠️This is still in development **     
+**⚠️This is still in development**     
 • This does not work on linux (yet)
