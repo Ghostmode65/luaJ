@@ -71,4 +71,4 @@ local success = pcall(dofile, LuaJ.directory.roaming.loader)
 if not success then Chat:log("Failed to load Default Library") return nil end
 
 
-Chat:log("§a☻ Setup Complete ☻")
+Chat:log("§a☻ LuaJ Setup Complete ☻")
