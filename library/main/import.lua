@@ -21,10 +21,9 @@ Import.file = function(file,doCache) --##Include file path in file, Starts at ro
     if not file or type(file) ~= "string" then Chat:log("file not a string".."\n§d"..tostring(file)) return nil end
     if doCache and _Env.Import_Cache[file] then return _Env.Import_Cache[file] end
 
-    local _jsmacros = GlobalVars:get(".roaming") .. "/.jsMacros/"
     if not file:match("%.lua$") then file = file .. ".lua" end
 
-    local filepath = _jsmacros..file
+    local filepath = LuaJ.directory.roaming[".jsMacros"]..file
     if not FS:exists(filepath) then Chat:log("§cFile does not exist: ".."\n§d"..filepath) return nil end
 
     local success, result = pcall(function()
@@ -41,7 +40,7 @@ Import.download = function(url, saveDirectory) --*.jsMacros/saveDirectory/github
     local valid = pcall(function() Request:create(url):get() return true end)
     if not valid then Chat:log("Invalid URL".."\n§d"..url) return nil end
 
-    local dir = LuaJ.directory.roaming[".jsMacros"]..saveDirectory
+    local dir = LuaJ.directory.roaming[".jsMacros"]..(saveDirectory and saveDirectory or "")
     if not FS:exists(dir) then FS:makeDir(dir) end
 
     local filename = url:match("^.+/(.+)$") 
