@@ -21,7 +21,7 @@ Shared folder is created in `roaming/.jsMacros/`
 It will show up in your macro folder as `unified` 
 
 **Library**  
-All .lua files in `Roaming\.jsMacros\scripts\library\yourfolder\` are loaded, this makes it easy to throw a file in and have it load on game launch.
+All .lua files in `Roaming\.jsMacros\scripts\library\yourfolder\` are executed, this makes it easy to throw a file in and have it will execute on game launch.
 
 Example: `Roaming\.jsMacros\scripts\library\logs\print.lua`  
   print(txt) = function() Chat:log(tostring(txt) end)
