@@ -2,7 +2,7 @@ local loaded
 if LuaJ then loaded = true goto skip end
 
 LuaJ = {
-    github = "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/heads/main/",
+    github = "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.0.1/",
 }
 
 LuaJ.getRoaming = function()

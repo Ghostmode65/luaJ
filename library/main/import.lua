@@ -62,6 +62,11 @@ Import.download = function(url, saveDirectory) --*.jsMacros/saveDirectory/github
         SavePath,
         {copyOption.REPLACE_EXISTING}
     )
+
+    if not FS:exists(dir..filename) then
+        Chat:log("Failed to download file: ".."\n§d"..url)
+    end
+
     return filename
 end
 
