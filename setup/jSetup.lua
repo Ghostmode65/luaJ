@@ -1,7 +1,7 @@
 LuaJ = {
     github = "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/heads/main/",
     --- If Your Forking ---
-    --- Add the libraries or scripts you want to download and load automatically here (chances are high you won't need to touch anything else)---
+    --- Add the libraries or scripts you want to download and execute automatically here (chances are high you won't need to touch anything else execpt installer.js)---
     ["External Library"] = {
         --"https://www.github.com/example1.lua",
         --"https://www.github.com/example2.lua"
@@ -87,3 +87,8 @@ Chat:log("§a☻ LuaJ Setup Complete ☻")
     --Reference class (xyz.wagyourtail.jsmacros.luaj.config.LuajConfig.useGlobalContext) but will need to get the instance of the config later.
 
 --Add a (add script trigger) function to the library
+    --likely remove or alter the setup/config.lua filename
+
+--add external modules as a setup option (might need to download/load --luaSocket?)
+    --LÖVE
+    --LuaRocks
