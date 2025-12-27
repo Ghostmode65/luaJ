@@ -2,7 +2,7 @@ local ScriptTrigger = Reflection:getClass("xyz.wagyourtail.jsmacros.core.config.
 local TriggerType = Reflection:getClass("xyz.wagyourtail.jsmacros.core.config.ScriptTrigger$TriggerType")
 
 local file = FS:open("unified/loader/jLoader.lua"):getFile()
-    if not file then return nil end
+if not FS:exists(file) then return nil end
 
 local trigger = Reflection:newInstance(
     ScriptTrigger,
@@ -18,3 +18,5 @@ JsMacros:getProfile():getRegistry():addScriptTrigger(trigger);
 
 --Remove installer trigger after setup
     --look into getting the file name of the scripts that was called
+
+
