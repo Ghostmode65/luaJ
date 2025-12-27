@@ -39,9 +39,14 @@ local function download()
     for _, file in pairs(files.extension) do
         pcall(function() Import.download(file.url, file.downloadTo) end)
     end
+
+    for _, url in pairs(LuaJ["External Library"]) do
+        pcall(function() Import.download(url, "scripts/".."library/custom/") end)
+    end
 end
 
 download()
 
 --might need to add a status check on pcalls (should fail in import)
 --Might add better checks to see if files exist before downloading
+    --only checks if jloader is installed or not

@@ -1,5 +1,11 @@
 LuaJ = {
     github = "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/heads/main/",
+    --- If Your Forking ---
+    --- Add the libraries or scripts you want to download and load automatically here (chances are high you won't need to touch anything else)---
+    ["External Library"] = {
+        --"https://www.github.com/example1.lua",
+        --"https://www.github.com/example2.lua"
+    }
 }
 
 LuaJ.getRoaming = function()
@@ -52,7 +58,7 @@ if not FS:exists(LuaJ.directory.roaming.loader) then
     if not success then Chat:log("Failed to download loader: ".."\n§d"..Setup.download) return nil end
 end
 
-local hasLaunchGame = function ()
+local addjLoader = function ()
     local tiggers = JsMacros:getProfile():getRegistry():getScriptTriggers()
 
     for i,v in pairs(tiggers) do
@@ -64,7 +70,7 @@ local hasLaunchGame = function ()
     if not success then Chat:log("Failed to setup config: ".."\n§d"..Setup.config) return nil end
 end
 
-hasLaunchGame()
+addjLoader()
 
 --load jLoader
 local success = pcall(dofile, LuaJ.directory.roaming.loader)
@@ -73,6 +79,11 @@ if not success then Chat:log("Failed to load Default Library") return nil end
 
 Chat:log("§a☻ LuaJ Setup Complete ☻")
 
+--Todo:
+    --Have an option to load certain tags, incase newer versions of luaJ break older scripts or unwanted libraries are loaded.
 
---Currently the installer sets useGlobalContext to true by altering the json.
---I have the reference class (xyz.wagyourtail.jsmacros.luaj.config.LuajConfig.useGlobalContext) but will need to get the instance of the config later.
+--Improve useGlobalContext method
+    --Currently the installer sets useGlobalContext to true by altering the json.
+    --Reference class (xyz.wagyourtail.jsmacros.luaj.config.LuajConfig.useGlobalContext) but will need to get the instance of the config later.
+
+--Add a (add script trigger) function to the library
