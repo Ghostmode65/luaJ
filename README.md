@@ -21,10 +21,14 @@ Shared folder is created in `roaming/.jsMacros/`
 It will show up in your macro folder as `unified` 
 
 **Library**  
-All .lua files in `Roaming\.jsMacros\scripts\library\yourfolder\` are loaded, this makes it easy to throw a file in and have it load on game launch.
+All .lua files in `Roaming\.jsMacros\scripts\library\yourfolder\` are executed, this makes it easy to throw a file in and it will execute on game launch.
 
 Example: `Roaming\.jsMacros\scripts\library\logs\print.lua`  
   print(txt) = function() Chat:log(tostring(txt) end)
+
+**Forking**  
+If you plan on forking to execute your own scripts along the installer, look in the jSetup.lua file. All you need to do is add the url to the table and your script will execute. 
+Make sure the url in installer.js is also changed to the url of your fork.
 
 **⚠️This is still in development**     
 • This does not work on linux (yet)
