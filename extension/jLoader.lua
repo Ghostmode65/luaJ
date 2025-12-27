@@ -52,7 +52,6 @@ if not FS:exists(LuaJ.directory.config.unified) then
     if not success then Chat:log("Failed to setup directory: ".."\n§d"..url) return nil end
 end
 
-
 local loadLibraries = function()
     local folders = FS:list(LuaJ.directory.roaming.library)
     local library = {}
@@ -85,7 +84,6 @@ local loadLibraries = function()
             if folder ~= "main" then library.nest(folder) end
         end
     end
-
 
    library.main()
    library.sub()

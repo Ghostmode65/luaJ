@@ -1,20 +1,20 @@
 local directory = {}
-local _jsMacros = LuaJ.getRoaming().."/.jsMacros/"
+local _jsMacros = LuaJ.directory.roaming[".jsMacros"]
 
 directory.setupFolders = function()
-        local dirc = { --/roaming/.jsmacros/
-            scripts = {
-                library = {},
-                extensions = {},
-                macros = {
-                    loader = {}
-                },
+    local dirc = { --/roaming/.jsmacros/
+        scripts = {
+            library = {},
+            extensions = {},
+            macros = {
+                loader = {}
             },
-            logs = {},
-            assets = {},
-            settings = {},
-            config = "config.lua",
-        }
+        },
+        logs = {},
+        assets = {},
+        settings = {},
+        config = "config.lua",
+    }
 
     local function makeDirectories(dir, basePath)
         basePath = basePath or ""
@@ -35,8 +35,8 @@ directory.setupFolders = function()
 end
 
 directory.unfiyFolder = function(delete)
-        local instancePath = LuaJ.directory.config.unified
-        local unifyPath = LuaJ.directory.roaming.macros
+    local instancePath = LuaJ.directory.config.unified
+    local unifyPath = LuaJ.directory.roaming.macros
 
     local Runtime = luajava.bindClass("java.lang.Runtime");
     local File = luajava.bindClass("java.io.File");
@@ -53,7 +53,7 @@ directory.unfiyFolder = function(delete)
     )
 
     if exitCode == true then
-        Chat:log("✓ Linked unified folder") 
+        Chat:log("✓ Linked unified folder")
         return true
     else
         Chat:log("✗ Failed to link unified folder (" .. tostring(exitCode) .. ")")

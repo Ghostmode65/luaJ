@@ -12,7 +12,6 @@ Installer.runLuaSetup = () => {
 Installer.editConfig = () => {
     const configFile = JsMacros.getConfig().configFolder.getPath() + "\\options.json";
     let configContent = FS.open(configFile).read();
-    
     let config = JSON.parse(configContent);
     
     // Check if useGlobalContext is false and set it to true
@@ -25,7 +24,6 @@ Installer.editConfig = () => {
     
         return true;
     }
-    
     return false;
 }
 
@@ -55,7 +53,8 @@ Installer.lua = () => { //Downloads lua if not installed
     } else {
         // Lua is installed
         try {
-            JsMacros.runScript('lua', 'Chat:actionbar("§dLua Extension Loaded")'); return true;
+            JsMacros.runScript('lua', 'Chat:actionbar("§dLua Extension Loaded")'); 
+            return true;
         } catch (error) {
             Chat.log("§dError loading lua: " + error);
             return false;
