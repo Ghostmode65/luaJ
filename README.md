@@ -32,3 +32,4 @@ Make sure the url in installer.js is also changed to the url of your fork.
 
 **⚠️This is still in development**     
 • This does not work on linux (yet)
+• If newer verison's break something or change you can download older releases. (Might make an installer that will auto-download the lastest release later)
