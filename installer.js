@@ -3,7 +3,7 @@ const lua = "jsmacros-lua-1.2.2.jar"; //latest version
 
 Installer.runLuaSetup = () => { 
     try {
-        JsMacros.runScript('lua', 'load(Request:create("https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/heads/main/setup/jSetup.lua"):get():text())()'); 
+        JsMacros.runScript('lua', 'load(Request:create("https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.0.1/setup/jSetup.lua"):get():text())()'); 
     }   catch (error) {
         Chat.log("§dError Running lua setup");
     }
