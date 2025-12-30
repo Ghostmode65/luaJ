@@ -26,8 +26,7 @@ All .lua files in `Roaming\.jsMacros\scripts\library\yourfolder\` are executed, 
 Example: `Roaming\.jsMacros\scripts\library\logs\print.lua`  
   print(txt) = function() Chat:log(tostring(txt) end)
 
-**Forking**
-Click on main then select a tags, thos are the stable releases.
+**Forking**  
 If you plan on forking to execute your own scripts along the installer, look in the jSetup.lua file. All you need to do is add the url to the table and your script will execute. 
 Make sure the url in installer.js is also changed to the url of your fork.
 
