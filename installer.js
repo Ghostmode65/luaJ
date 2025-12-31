@@ -1,6 +1,9 @@
 const Installer = {};
 const lua = "jsmacros-lua-1.2.2.jar"; //latest version
 
+const unbindInstallerJs = true; //Unbind installer.js after install
+const deleteInstallerJs = false; //Delete installer.js after install
+
 Installer.runLuaSetup = () => { 
     try {
         JsMacros.runScript('lua', 'load(Request:create("https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.0.1/setup/jSetup.lua"):get():text())()'); 
@@ -66,4 +69,6 @@ Installer.lua = () => { //Downloads lua if not installed
 if (Installer.lua()) {
     Installer.editConfig();
     Installer.runLuaSetup()
+    GlobalVars:putBoolean("unbindInstallerJs",unbindInstallerJs);
+    GlobalVars:putBoolean("deleteInstallerJs", deleteInstallerJs);
 }

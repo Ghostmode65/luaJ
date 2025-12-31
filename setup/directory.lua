@@ -30,7 +30,6 @@ directory.setupFolders = function()
                 end
         end
     end
-
     makeDirectories(dirc)
 end
 
@@ -38,9 +37,7 @@ directory.unfiyFolder = function(delete)
     local instancePath = LuaJ.directory.config.unified
     local unifyPath = LuaJ.directory.roaming.macros
 
-    local Runtime = luajava.bindClass("java.lang.Runtime");
     local File = luajava.bindClass("java.io.File");
-
     local junctionDir = Reflection:newInstance(
         File,
             {instancePath}
@@ -65,4 +62,4 @@ local status, err = pcall(directory.setupFolders)
 if not status then Chat:log("§cError setting up folders") end
 
 local status, err = pcall(directory.unfiyFolder)
-if not status then Chat:log("§cError unifying folders") end
+if not status then Chat:log("§cError linking unified folder") end

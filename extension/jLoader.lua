@@ -1,58 +1,33 @@
-local loaded
-if LuaJ then loaded = true goto skip end
+LuaJ = LuaJ or {}
 
-LuaJ = {
-    github = "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.0.1/",
-}
-
-LuaJ.getRoaming = function()
-    if GlobalVars:getString(".roaming") then return GlobalVars:getString(".roaming") end
-
-        local File = luajava.bindClass("java.io.File");
-        local System = luajava.bindClass("java.lang.System");
-        local roaming = Reflection:newInstance(
-            File,
-                {System:getenv("APPDATA")}
-        )
-        GlobalVars:putString(".roaming",roaming:getAbsolutePath())
-        return roaming:getAbsolutePath();
-end
-
-::skip::
-
-local roaming = LuaJ.getRoaming()
+local roaming = os.getenv("APPDATA")
 local configFolder = JsMacros:getConfig().configFolder:getPath()
 
-if loaded then goto skip2 end
-
-LuaJ.directory  =  {
+LuaJ.directory = LuaJ.directory or  {
     roaming = {
         folder = roaming,
         [".jsMacros"] = roaming.. "/.jsMacros/",
-        library = roaming.. "/.jsMacros/scripts/library",
-        extensions = roaming.. "/.jsMacros/scripts/extensions",
-        macros = roaming.. "/.jsMacros/scripts/Macros",
-        loader = roaming.. "/.jsMacros/scripts/Macros/loader/jLoader.lua",
+        library = roaming.. "/.jsMacros/scripts/library/",
+        extensions = roaming.. "/.jsMacros/scripts/extensions/",
+        macros = roaming.. "/.jsMacros/scripts/Macros/",
+        --loader = roaming.. "/.jsMacros/scripts/Macros/loader/jLoader.lua", --Moved to config
     },
     config = {
         folder = configFolder,
-        macros = configFolder.."/Macros",
+        macros = configFolder.."/Macros/",
         unified = configFolder.."/Macros/unified",
+        loader = configFolder.."/Macros/jLoader.lua",
     }
 }
 
-loaded = true
-
-::skip2::
-
 --Relink unified folder if missing 
 if not FS:exists(LuaJ.directory.config.unified) then
-    local url = LuaJ.github.."setup/directory.lua"
+    local url = "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.0.1/".."setup/directory.lua"
     local success = pcall(function() load(Request:create(url):get():text())() end)
     if not success then Chat:log("Failed to setup directory: ".."\n§d"..url) return nil end
 end
 
-local loadLibraries = function()
+LuaJ.loadLibraries = LuaJ.loadLibraries or function()
     local folders = FS:list(LuaJ.directory.roaming.library)
     local library = {}
 
@@ -90,4 +65,4 @@ local loadLibraries = function()
 
 end
 
-loadLibraries()
+LuaJ.loadLibraries()

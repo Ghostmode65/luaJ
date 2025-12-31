@@ -1,6 +1,5 @@
 
-LuaJ.addScriptTrigger = function(file,type,event)
-
+LuaJ.addScriptTrigger = function(file,type,event) --config/Macros/
     local Types = {
         ["event"] = "EVENT",
         ["keydown"] = "KEY_RISING",
@@ -11,13 +10,13 @@ LuaJ.addScriptTrigger = function(file,type,event)
 local ScriptTrigger = Reflection:getClass("xyz.wagyourtail.jsmacros.core.config.ScriptTrigger")
 local TriggerType = Reflection:getClass("xyz.wagyourtail.jsmacros.core.config.ScriptTrigger$TriggerType")
 
-FS:open(file):getFile()
-if not FS:exists(file) then return nil end
+local dir = io.open(LuaJ.directory.config.macros..file)
+if not dir then return nil else dir:close() end
 
 local trigger = Reflection:newInstance(
     ScriptTrigger,
     {
-        TriggerType.Types[type],
+        (Types[type] and TriggerType[Types[type]] or TriggerType.EVENT),
         event, --if event is a key then it needs to be the key code key.keyboard.keypad.4
         file,
         true,
@@ -42,3 +41,6 @@ local tiggers = registry:getScriptTriggers()
     end
 end
 
+
+--Example Usage:
+    --LuaJ.addScriptTrigger("installer.js","keydown","key.keyboard.keypad.4")

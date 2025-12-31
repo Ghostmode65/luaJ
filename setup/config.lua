@@ -1,22 +1,24 @@
-local ScriptTrigger = Reflection:getClass("xyz.wagyourtail.jsmacros.core.config.ScriptTrigger")
-local TriggerType = Reflection:getClass("xyz.wagyourtail.jsmacros.core.config.ScriptTrigger$TriggerType")
+GlobalVars:putBoolean("unbindInstallerJs",true);
+GlobalVars:putBoolean("deleteInstallerJs", true);
 
-local file = FS:open("unified/loader/jLoader.lua"):getFile()
-if not FS:exists(file) then return nil end
+if GlobalVars:getBoolean("unbindInstallerJs") or GlobalVars:getBoolean("deleteInstallerJs") then
+    LuaJ.removeScriptTrigger("installer.js",nil,true)
+    GlobalVars:remove("unbindInstallerJs")
+end
 
-local trigger = Reflection:newInstance(
-    ScriptTrigger,
-    {
-        TriggerType.EVENT,
-        "LaunchGame",
-        file,
-        true,
-        false
-    }
-)
-JsMacros:getProfile():getRegistry():addScriptTrigger(trigger);
+if GlobalVars:getBoolean("deleteInstallerJs") then
+    local File = FS:open(JsMacros:getConfig().configFolder:getPath().."/Macros/installer.js"):getFile()
+    FS:unlink(File)
+    GlobalVars:remove("deleteInstallerJs")
+end
 
---Remove installer trigger after setup
-    --look into getting the file name of the scripts that was called
+LuaJ.addScriptTrigger("jLoader.lua","event","LaunchGame")
 
+for i,v in ipairs(LuaJ.setup["Keybinds"]) do
+    local filename = v.url and v.url:match("([^/]+)$") or v.filename
+    if v.url == "" then return nil end
+    if v.url then filename = Import.download() end
 
+    local dir = LuaJ.directory.roaming.macros..(v.folder and (v.folder.."/"..filename) or filename)
+    LuaJ.addScriptTrigger(dir,"keydown",v.keybind)
+end

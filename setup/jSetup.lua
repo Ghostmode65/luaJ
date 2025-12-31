@@ -1,50 +1,28 @@
-LuaJ = {
-    github = "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.0.1/",
+LuaJ = {}
+LuaJ.setup = {
+    github = "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.1.0/",
     --- If Your Forking ---
     --- Add the libraries or scripts you want to download and execute automatically here (chances are high you won't need to touch anything else execpt installer.js)---
     ["External Library"] = {
         --"https://www.github.com/example1.lua",
         --"https://www.github.com/example2.lua"
-    }
-}
-
-LuaJ.getRoaming = function()
-    if GlobalVars:getString(".roaming") then return GlobalVars:getString(".roaming") end
-
-        local File = luajava.bindClass("java.io.File");
-        local System = luajava.bindClass("java.lang.System");
-        local roaming = Reflection:newInstance(
-            File,
-                {System:getenv("APPDATA")}
-        )
-        GlobalVars:putString(".roaming",roaming:getAbsolutePath())
-        return roaming:getAbsolutePath();
-end
-
-local roaming = LuaJ.getRoaming()
-local configFolder = JsMacros:getConfig().configFolder:getPath()
-
-LuaJ.directory  =  {
-    roaming = {
-        folder = roaming,
-        [".jsMacros"] = roaming.. "/.jsMacros/",
-        library = roaming.. "/.jsMacros/scripts/library",
-        extensions = roaming.. "/.jsMacros/scripts/extensions",
-        macros = roaming.. "/.jsMacros/scripts/Macros",
-        loader = roaming.. "/.jsMacros/scripts/Macros/loader/jLoader.lua",
     },
-    config = {
-        folder = configFolder,
-        macros = configFolder.."/Macros",
-        unified = configFolder.."/Macros/unified",
+    ["Keybinds"] = {
+        {url = "", keybind = "key.keyboard.keypad.4", folder = "custom"},
     }
 }
 
 local Setup = {
-    directory = LuaJ.github.."setup/directory.lua",
-    download = LuaJ.github.."setup/download.lua",
-    config = LuaJ.github.."setup/config.lua",
+    directory = LuaJ.setup.github.."setup/directory.lua",
+    download = LuaJ.setup.github.."setup/download.lua",
+    config = LuaJ.setup.github.."setup/config.lua",
+
+    loader = LuaJ.setup.github.."extension/jLoader.lua",
 }
+
+--run jLoader
+local success = pcall(function() load(Request:create(Setup.loader):get():text())() end)
+if not success then Chat:log("Failed to load jLoader: ".."\n§d"..Setup.loader) return nil end
 
 --Setup directory if doesn't exist
 if not FS:exists(LuaJ.directory.config.unified) then
@@ -52,7 +30,7 @@ if not FS:exists(LuaJ.directory.config.unified) then
         if not success then Chat:log("Failed to setup directory: ".."\n§d"..Setup.directory) return nil end
 end
 
---Setup extensions if they don't exist
+--Download files
 if not FS:exists(LuaJ.directory.roaming.loader) then
     local success = pcall(function() return load(Request:create(Setup.download):get():text())() end)
     if not success then Chat:log("Failed to download loader: ".."\n§d"..Setup.download) return nil end
@@ -72,23 +50,9 @@ end
 
 addjLoader()
 
---load jLoader
-local success = pcall(dofile, LuaJ.directory.roaming.loader)
-if not success then Chat:log("Failed to load Default Library") return nil end
+--Load all libraries
+LuaJ.loadLibraries()
 
 
 Chat:log("§a☻ LuaJ Setup Complete ☻")
 
---Todo:
-    --Have an option to load certain tags, incase newer versions of luaJ break older scripts or unwanted libraries are loaded.
-
---Improve useGlobalContext method
-    --Currently the installer sets useGlobalContext to true by altering the json.
-    --Reference class (xyz.wagyourtail.jsmacros.luaj.config.LuajConfig.useGlobalContext) but will need to get the instance of the config later.
-
---Add a (add script trigger) function to the library
-    --likely remove or alter the setup/config.lua filename
-
---add external modules as a setup option (Would have to remove host into lua instance)
-    --LuaRocks (might need to download/load --luaSocket?)
-    --LÖVE
