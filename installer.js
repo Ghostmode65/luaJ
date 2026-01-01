@@ -1,6 +1,6 @@
 //Installer config
 const lua = "https://github.com/JsMacros/JsMacros-Lua/releases/download/1.2.2/jsmacros-lua-1.2.2.jar"; //latest version
-const LauJ = "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.0.1/setup/jSetup.lua"; //luaJ setup
+const LauJ = "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.1.0/setup/jSetup.lua"; //luaJ setup
 
 //Installer options
 const unbindInstallerJs = true; //Unbind installer.js after install
