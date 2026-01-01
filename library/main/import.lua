@@ -55,12 +55,13 @@ Import.file = function(file,doCache) --##Include file path in file, Starts at ro
 end
 
 
-Import.download = function(url, saveDirectory, overwrite) --*.jsMacros/saveDirectory/github filename or /config/saveDirectory/github filename
+Import.download = function(url, saveDirectory, overwrite) --*.jsMacros/saveDirectory/github filename or config/saveDirectory/github filename
     local valid = pcall(function() Request:create(url):get() return true end)
     if not valid then Chat:log("Invalid URL".."\n§d"..url) return nil end
 
     local dir
     if saveDirectory and saveDirectory:match("^config/") then
+        saveDirectory = string.sub(saveDirectory, 8)
         dir = LuaJ.directory.config..(saveDirectory or "")
     else
         dir = LuaJ.directory.roaming[".jsMacros"]..(saveDirectory or "")
@@ -98,5 +99,3 @@ Import.download = function(url, saveDirectory, overwrite) --*.jsMacros/saveDirec
    
     return filename
 end
-
-Import.download( "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/heads/main/installer.js", "scripts/macros/", true)

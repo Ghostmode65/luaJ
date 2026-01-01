@@ -68,7 +68,9 @@ Installer.lua = () => { //Downloads lua if not installed
 
 if (Installer.lua()) {
     Installer.editConfig();
+        GlobalVars.putBoolean("unbindInstallerJs",unbindInstallerJs);
+        GlobalVars.putBoolean("deleteInstallerJs", deleteInstallerJs);
     Installer.runLuaSetup()
-    GlobalVars:putBoolean("unbindInstallerJs",unbindInstallerJs);
-    GlobalVars:putBoolean("deleteInstallerJs", deleteInstallerJs);
 }
+  
+   

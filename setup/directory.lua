@@ -6,9 +6,7 @@ directory.setupFolders = function()
         scripts = {
             library = {},
             extensions = {},
-            macros = {
-                loader = {}
-            },
+            macros = {},
         },
         logs = {},
         assets = {},

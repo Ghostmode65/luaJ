@@ -1,6 +1,3 @@
-GlobalVars:putBoolean("unbindInstallerJs",true);
-GlobalVars:putBoolean("deleteInstallerJs", true);
-
 if GlobalVars:getBoolean("unbindInstallerJs") or GlobalVars:getBoolean("deleteInstallerJs") then
     LuaJ.removeScriptTrigger("installer.js",nil,true)
     GlobalVars:remove("unbindInstallerJs")
