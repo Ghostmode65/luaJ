@@ -28,7 +28,7 @@ if not FS:exists(LuaJ.directory.config.unified) then
 end
 
 LuaJ.loadLibraries = LuaJ.loadLibraries or function()
-    local folders = FS:list(LuaJ.directory.roaming.library)
+    local folders = FS:list(LuaJ.directory.roaming.library) or {}
     local library = {}
 
     local loadfile = function(path,filename)
