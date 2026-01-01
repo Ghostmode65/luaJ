@@ -9,13 +9,13 @@ Easily setup up Lua with 1 script no matter the instance.
 | ☑️ | Creates one shared folder, all your scripts will be available on feather, lunar, prism, vanilla, and more. |
 | ☑️ | Executes libraries and globals on game launch |
 
-**Shared folder**  
+**Shared folder**<br>
 Shared folder is created in `roaming/.jsMacros/`
 It will show up in your macro folder as `unified` 
 
-**⚠️This is still in development**     
-• This does not work on linux (yet)
-• useGlobalContext does not always save in the config
+**⚠️This is still in development**<br> 
+• This does not work on linux (yet)<br>
+• useGlobalContext does not always save in the config<br>
 
 **Check Wiki for more info on**<br>
 • Forking<br>
