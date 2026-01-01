@@ -13,7 +13,7 @@ Easily setup up Lua with 1 script no matter the instance.
 Shared folder is created in `roaming/.jsMacros/`
 It will show up in your macro folder as `unified` 
 
-**⚠️This is still in development ⚠️**<br> 
+**⚠️This is still in development⚠️**<br> 
 • This does not work on linux (yet)<br>
 • useGlobalContext does not always save in the config<br>
 
