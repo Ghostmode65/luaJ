@@ -31,7 +31,7 @@ if not FS:exists(LuaJ.directory.config.unified) then
 end
 
 --Download files
-if not FS:exists(LuaJ.directory.roaming.loader) then
+if not FS:exists(LuaJ.directory.config.loader) then
     local success = pcall(function() return load(Request:create(Setup.download):get():text())() end)
     if not success then Chat:log("Failed to download loader: ".."\n§d"..Setup.download) return nil end
 end

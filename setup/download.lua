@@ -3,7 +3,7 @@ if not LuaJ.setup or not LuaJ.setup.github then return nil end
 local files = {
     main = {
         import = {url = LuaJ.setup.github.."library/main/import.lua", downloadTo = "scripts/".."library/main/"},
-        scripttrigger = {url = LuaJ.setup.github.."library/main/scripttrigger.lua", downloadTo = "scripts/".."library/main/"},
+        scripttrigger = {url = LuaJ.setup.github.."library/main/scriptTrigger.lua", downloadTo = "scripts/".."library/main/"},
     },
     sub = {
         roman = {url = LuaJ.setup.github.."library/math/roman.lua", downloadTo = "scripts/".."library/math/"},
