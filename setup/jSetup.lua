@@ -48,7 +48,8 @@ addjLoader()
 
 --Load all libraries
 LuaJ.loadLibraries()
-
+LuaJ.setup = nil
 
 Chat:log("§a☻ LuaJ Setup Complete ☻")
+
 

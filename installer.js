@@ -1,12 +1,16 @@
-const Installer = {};
-const lua = "jsmacros-lua-1.2.2.jar"; //latest version
+//Installer config
+const lua = "https://github.com/JsMacros/JsMacros-Lua/releases/download/1.2.2/jsmacros-lua-1.2.2.jar"; //latest version
+const LauJ = "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.0.1/setup/jSetup.lua"; //luaJ setup
 
+//Installer options
 const unbindInstallerJs = true; //Unbind installer.js after install
 const deleteInstallerJs = false; //Delete installer.js after install
 
+//Installer
+const Installer = {};
 Installer.runLuaSetup = () => { 
     try {
-        JsMacros.runScript('lua', 'load(Request:create("https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.0.1/setup/jSetup.lua"):get():text())()'); 
+        JsMacros.runScript('lua', 'load(Request:create(' + LauJ + ')):get():text())()'); 
     }   catch (error) {
         Chat.log("§dError Running lua setup");
     }
@@ -31,7 +35,6 @@ Installer.editConfig = () => {
 }
 
 Installer.lua = () => { //Downloads lua if not installed
-    const url = "https://github.com/JsMacros/JsMacros-Lua/releases/download/1.2.2/" + lua; 
     const dir = JsMacros.getConfig().configFolder.getPath() + "\\LanguageExtensions\\"; 
     const file = dir + lua; 
 
@@ -40,7 +43,7 @@ Installer.lua = () => { //Downloads lua if not installed
             FS.makeDir(dir);
             const URL = Java.type("java.net.URL");
             Java.type("java.nio.file.Files").copy(
-                new URL(url).openStream(),
+                new URL(lua).openStream(),
                 Java.type("java.nio.file.Paths").get(file),
                 Java.type("java.nio.file.StandardCopyOption").REPLACE_EXISTING
             );

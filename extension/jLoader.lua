@@ -10,7 +10,6 @@ LuaJ.directory = LuaJ.directory or  {
         library = roaming.. "/.jsMacros/scripts/library/",
         extensions = roaming.. "/.jsMacros/scripts/extensions/",
         macros = roaming.. "/.jsMacros/scripts/Macros/",
-        --loader = roaming.. "/.jsMacros/scripts/Macros/loader/jLoader.lua", --Moved to config
     },
     config = {
         folder = configFolder,
@@ -21,10 +20,29 @@ LuaJ.directory = LuaJ.directory or  {
 }
 
 --Relink unified folder if missing 
-if not FS:exists(LuaJ.directory.config.unified) then
-    local url = "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.0.1/".."setup/directory.lua"
-    local success = pcall(function() load(Request:create(url):get():text())() end)
-    if not success then Chat:log("Failed to setup directory: ".."\n§d"..url) return nil end
+local unfiyFolder = function(delete)
+    local instancePath = LuaJ.directory.config.unified
+    local unifyPath = LuaJ.directory.roaming.macros
+
+    local File = luajava.bindClass("java.io.File");
+    local junctionDir = Reflection:newInstance(
+        File,
+            {instancePath}
+    )
+    if (junctionDir:exists() and delete) then junctionDir:delete() elseif (junctionDir:exists() and not delete) then return true end
+
+    os.execute('cmd /c rmdir "' .. instancePath .. '" >nul 2>&1')
+    local exitCode = os.execute(
+        'cmd /c mklink /J "' .. instancePath .. '" "' .. unifyPath .. '"'
+    )
+
+    if exitCode == true then
+        Chat:log("✓ Linked unified folder")
+        return true
+    else
+        Chat:log("✗ Failed to link unified folder (" .. tostring(exitCode) .. ")")
+        return false
+    end
 end
 
 LuaJ.loadLibraries = LuaJ.loadLibraries or function()
@@ -65,4 +83,7 @@ LuaJ.loadLibraries = LuaJ.loadLibraries or function()
 
 end
 
-LuaJ.loadLibraries()
+local status, err = pcall(unfiyFolder)
+if not status then Chat:log("§cError linking unified folder") end
+
+if not LuaJ.setup then LuaJ.loadLibraries() end
