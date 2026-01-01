@@ -48,7 +48,7 @@ LuaJ.loadLibraries = LuaJ.loadLibraries or function()
     end
 
    library.main = function()
-        local files = FS:list(LuaJ.directory.roaming.library.."/main/")
+        local files = FS:list(LuaJ.directory.roaming.library.."/main/") or {}
         for _,filename in pairs(files) do
             library.nest("main/"..filename)
         end
