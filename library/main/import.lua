@@ -6,22 +6,6 @@ Import = {} --The name isn't the best, but you can already do most similar thing
 
 local _jsMacros = LuaJ.directory.roaming[".jsMacros"]
 
-
-local function makeDirectories(dir, basePath)
-    basePath = basePath or ""
-    for key, value in pairs(dir) do
-        if type(value) == "table" then
-            local newPath = basePath..key.."/"
-            if not FS:exists(_jsMacros..newPath) then FS:makeDir(_jsMacros..newPath) end
-            makeDirectories(value, newPath)
-        end
-        if type(value) == "string" then
-            local filePath = _jsMacros .. basePath .. value
-            if not FS:exists(filePath) then FS:createFile(_jsMacros..basePath,value ,true) end
-            end
-    end
-end
-
 Import.url = function(url,doCache)
     if not url or type(url) ~= "string" then Chat:log("url not a string".."\n§d"..tostring(url)) return nil end
     if doCache and _Env.Import_Cache[url] then return _Env.Import_Cache[url] end
