@@ -11,7 +11,7 @@ local files = {
         decode = {url = LuaJ.setup.github.."library/json/decode.lua", downloadTo = "scripts/".."library/json/"}
     },
     extension = {
-        jLoader = {url = LuaJ.setup.github.."extension/jLoader.lua", downloadTo = "config/".."Macros/"},
+        jLoader = {url = LuaJ.setup.github.."extension/jLoader.lua", downloadTo = {}},
     },
 }
 

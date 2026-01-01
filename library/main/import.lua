@@ -44,11 +44,10 @@ Import.download = function(url, saveDirectory, overwrite) --*.jsMacros/saveDirec
     if not valid then Chat:log("Invalid URL".."\n§d"..url) return nil end
 
     local dir
-    if saveDirectory and saveDirectory:match("^config/") then
-        saveDirectory = string.sub(saveDirectory, 8)
-        dir = LuaJ.directory.config..(saveDirectory or "")
-    else
+    if type(saveDirectory) == "string" then
         dir = LuaJ.directory.roaming[".jsMacros"]..(saveDirectory or "")
+    else
+        dir = LuaJ.directory.config.macros..(saveDirectory[1] or "")
     end
     
     if not FS:exists(dir) then
@@ -58,7 +57,9 @@ Import.download = function(url, saveDirectory, overwrite) --*.jsMacros/saveDirec
     local filename = url:match("^.+/(.+)$")
     if not overwrite and FS:exists(dir..filename) then return filename end --Test
 
-    Chat:log("Downloading §d"..filename.."§f to \n§f.jsMacros/"..saveDirectory)
+    if filename == "jLoader.lua" then dir = LuaJ.directory.config.macros end
+
+    Chat:log("Downloading §d"..filename.."§f to \n§f.jsMacros/"..(type(saveDirectory) == "string" and saveDirectory or ("§eMacros/".. (saveDirectory[1] or ""))))
 
     local URL_Manager = luajava.bindClass("java.net.URL")
     local Files = luajava.bindClass("java.nio.file.Files")
