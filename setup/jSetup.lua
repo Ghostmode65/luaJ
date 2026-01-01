@@ -24,17 +24,13 @@ local Setup = {
 local success = pcall(function() load(Request:create(Setup.loader):get():text())() end)
 if not success then Chat:log("Failed to load jLoader: ".."\n§d"..Setup.loader) return nil end
 
---Setup directory if doesn't exist
-if not FS:exists(LuaJ.directory.config.unified) then
-        local success = pcall(function() load(Request:create(Setup.directory):get():text())() end)
-        if not success then Chat:log("Failed to setup directory: ".."\n§d"..Setup.directory) return nil end
-end
+--Setup directory
+local success = pcall(function() load(Request:create(Setup.directory):get():text())() end)
+if not success then Chat:log("Failed to setup directory: ".."\n§d"..Setup.directory) return nil end
 
 --Download files
-if not FS:exists(LuaJ.directory.config.loader) then
-    local success = pcall(function() return load(Request:create(Setup.download):get():text())() end)
-    if not success then Chat:log("Failed to download loader: ".."\n§d"..Setup.download) return nil end
-end
+local success = pcall(function() return load(Request:create(Setup.download):get():text())() end)
+if not success then Chat:log("Failed to download loader: ".."\n§d"..Setup.download) return nil end
 
 local addjLoader = function ()
     local tiggers = JsMacros:getProfile():getRegistry():getScriptTriggers()
