@@ -17,7 +17,7 @@ It will show up in your macro folder as `unified`
 • This does not work on linux (yet)
 • useGlobalContext does not always save in the config
 
-**Check Wiki for more info on**
-• Forking
-• Library
-• Included functions
+**Check Wiki for more info on**<br>
+• Forking<br>
+• Library<br>
+• Included functions<br>
