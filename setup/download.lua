@@ -7,7 +7,8 @@ local files = {
     },
     sub = {
         roman = {url = LuaJ.setup.github.."library/math/roman.lua", downloadTo = "scripts/".."library/math/"},
-        json = {url = LuaJ.setup.github.."library/json/convert.lua", downloadTo = "scripts/".."library/json/"},
+        encode = {url = LuaJ.setup.github.."library/json/encode.lua", downloadTo = "scripts/".."library/json/"},
+        decode = {url = LuaJ.setup.github.."library/json/decode.lua", downloadTo = "scripts/".."library/json/"}
     },
     extension = {
         jLoader = {url = LuaJ.setup.github.."extension/jLoader.lua", downloadTo = "config/".."Macros/"},
