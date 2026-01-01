@@ -1,16 +1,22 @@
 //Installer config
-const lua = "https://github.com/JsMacros/JsMacros-Lua/releases/download/1.2.2/jsmacros-lua-1.2.2.jar"; //latest version
-const LauJ = "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.1.0/setup/jSetup.lua"; //luaJ setup
+const lua = {
+    url: "https://github.com/JsMacros/JsMacros-Lua/releases/download/1.2.2/",
+    version: "jsmacros-lua-1.2.2.jar" //latest version
+}; 
+const LauJ = "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.1.0/setup/jSetup.lua";
 
 //Installer options
-const unbindInstallerJs = true; //Unbind installer.js after install
-const deleteInstallerJs = false; //Delete installer.js after install
+const options = {
+    unbindInstallerJs: true, //Unbind installer.js after install
+    deleteInstallerJs: false, //Delete installer.js after install
+};
+
 
 //Installer
 const Installer = {};
 Installer.runLuaSetup = () => { 
     try {
-        JsMacros.runScript('lua', 'load(Request:create(' + LauJ + ')):get():text())()'); 
+        JsMacros.runScript('lua', 'load(Request:create("' + LauJ + '"):get():text())()'); 
     }   catch (error) {
         Chat.log("§dError Running lua setup");
     }
@@ -36,14 +42,14 @@ Installer.editConfig = () => {
 
 Installer.lua = () => { //Downloads lua if not installed
     const dir = JsMacros.getConfig().configFolder.getPath() + "\\LanguageExtensions\\"; 
-    const file = dir + lua; 
+    const file = dir + lua.version; 
 
     if (!FS.exists(file)) { 
         try {
             FS.makeDir(dir);
             const URL = Java.type("java.net.URL");
             Java.type("java.nio.file.Files").copy(
-                new URL(lua).openStream(),
+                new URL(lua.url + lua.version).openStream(),
                 Java.type("java.nio.file.Paths").get(file),
                 Java.type("java.nio.file.StandardCopyOption").REPLACE_EXISTING
             );
@@ -71,8 +77,8 @@ Installer.lua = () => { //Downloads lua if not installed
 
 if (Installer.lua()) {
     Installer.editConfig();
-        GlobalVars.putBoolean("unbindInstallerJs",unbindInstallerJs);
-        GlobalVars.putBoolean("deleteInstallerJs", deleteInstallerJs);
+        GlobalVars.putBoolean("unbindInstallerJs",options.unbindInstallerJs);
+        GlobalVars.putBoolean("deleteInstallerJs",options.deleteInstallerJs);
     Installer.runLuaSetup()
 }
   
