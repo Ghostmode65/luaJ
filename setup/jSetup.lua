@@ -1,6 +1,6 @@
 LuaJ = {}
 
-local config = GlobalVars:getObject("LauJConfiguration")
+local config = GlobalVars:getObject("LuaJConfiguration")
 
 LuaJ.setup = {
     github = config.github,
