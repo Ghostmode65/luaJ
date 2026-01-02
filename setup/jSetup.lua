@@ -1,15 +1,13 @@
 LuaJ = {}
+
+local config = GlobalVars.getObject("LauJConfiguration")
+
 LuaJ.setup = {
-    github = "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.1.0/",
-    --- If Your Forking ---
-    --- Add the libraries or scripts you want to download and execute automatically here (chances are high you won't need to touch anything else execpt installer.js)---
-    ["External Library"] = {
-        --"https://www.github.com/example1.lua",
-        --"https://www.github.com/example2.lua"
-    },
-    ["Keybinds"] = {
-        {url = "", keybind = "key.keyboard.keypad.4", folder = "custom"},
-    }
+    github = config.github,
+  
+    ["External Library"] = config.externalLibraries or {},
+    ["Keybinds"] = config.keybinds or {},
+    user = config.user or {},
 }
 
 local Setup = {
