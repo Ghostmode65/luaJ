@@ -29,7 +29,7 @@ const Installer = {};
 
 Installer.runLuaJSetup = () => { 
     try {
-        JsMacros.runScript('lua', 'load(Request:create("' + dev.LuaJ + "setup/jSetup.lua" + '"):get():text())()'); 
+        JsMacros.runScript('lua', 'load(Request:create("' + dev.github + 'setup/jSetup.lua"):get():text())()'); 
     }   catch (error) {
         Chat.log("§dError Running lua setup");
     }
@@ -89,41 +89,27 @@ Installer.lua = () => { //Downloads lua if not installed
 };
 
 Installer.LuaJConfiguration = () => {
-const HashMap = Java.type("java.util.HashMap");
-const ArrayList = Java.type("java.util.ArrayList");
+    const HashMap = Java.type("java.util.HashMap");
+    const ArrayList = Java.type("java.util.ArrayList");
 
-let keybindsMap = new HashMap();
-
-for (let name in dev.keybinds) {
-    let bind = dev.keybinds[name];
-
-    let bindMap = new HashMap();
-    bindMap.put("filepath", bind.filepath);
-    bindMap.put("event", bind.event);
-    bindMap.put("key", bind.key);
-
-    keybindsMap.put(name, bindMap);
-}
-
-let libs = new ArrayList();
-    for (let v of dev.externalLibraries) {
-        libs.add(v);
+    let keybindsList = new ArrayList();
+    for (let name in dev.keybinds) {
+        let bindMap = new HashMap();
+        bindMap.put("name", name);
+        Object.entries(dev.keybinds[name]).forEach(([k, v]) => bindMap.put(k, v));
+        keybindsList.add(bindMap);
     }
 
-let userMap = new HashMap();
-   for (let name in user) {
-    userMap.put(name, user[name]);
-}
+    let libs = new ArrayList();
+    dev.externalLibraries.forEach(lib => libs.add(lib));
 
-let map = new HashMap();
-    map.put("LuaJ", dev.LuaJ);
-    map.put("lib", libs);
-    map.put("keybinds", keybindsMap);
+    let map = new HashMap();
+    map.put("github", dev.github);
+    map.put("libs", libs);
+    map.put("keybinds", keybindsList);
 
-    
-GlobalVars.putObject("LauJConfiguration", map);
-
-}
+    GlobalVars.putObject("LuaJConfiguration", map);
+};
 
 if (Installer.lua()) {
     Installer.editConfig();

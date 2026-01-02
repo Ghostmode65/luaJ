@@ -1,11 +1,11 @@
 LuaJ = {}
 
-local config = GlobalVars.getObject("LauJConfiguration")
+local config = GlobalVars:getObject("LauJConfiguration")
 
 LuaJ.setup = {
     github = config.github,
   
-    ["External Library"] = config.externalLibraries or {},
+    ["External Library"] = config.libs or {},
     ["Keybinds"] = config.keybinds or {},
     user = config.user or {},
 }
