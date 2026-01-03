@@ -1,22 +1,35 @@
-//Installer config
-const lua = {
-    url: "https://github.com/JsMacros/JsMacros-Lua/releases/download/1.2.2/",
-    version: "jsmacros-lua-1.2.2.jar" //latest version
-}; 
-const LauJ = "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.1.0/setup/jSetup.lua";
-
-//Installer options
-const options = {
+//Installer options for anyone
+const user = {
     unbindInstallerJs: true, //Unbind installer.js after install
     deleteInstallerJs: false, //Delete installer.js after install
 };
 
 
+//Config settings for developers
+const lua = {
+    url: "https://github.com/JsMacros/JsMacros-Lua/releases/download/1.2.2/",
+    version: "jsmacros-lua-1.2.2.jar",
+    
+};
+
+const dev = {
+    github: "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.1.0/", //Change this to your github raw url
+
+    externalLibraries: [//Add the libraries or scripts you want to download and execute automatically here
+
+    ],
+
+    keybinds: {
+        example: {filepath: "installer.js", event: "keydown", key: "keyboard.key.4" },
+    },
+};
+
 //Installer
 const Installer = {};
-Installer.runLuaSetup = () => { 
+
+Installer.runLuaJSetup = () => { 
     try {
-        JsMacros.runScript('lua', 'load(Request:create("' + LauJ + '"):get():text())()'); 
+        JsMacros.runScript('lua', 'load(Request:create("' + dev.github + 'setup/jSetup.lua"):get():text())()'); 
     }   catch (error) {
         Chat.log("§dError Running lua setup");
     }
@@ -75,11 +88,38 @@ Installer.lua = () => { //Downloads lua if not installed
     return true;
 };
 
+Installer.LuaJConfiguration = () => {
+    const HashMap = Java.type("java.util.HashMap");
+    const ArrayList = Java.type("java.util.ArrayList");
+
+    let keybindsList = new ArrayList();
+    for (let name in dev.keybinds) {
+        let bindMap = new HashMap();
+        bindMap.put("name", name);
+        Object.entries(dev.keybinds[name]).forEach(([k, v]) => bindMap.put(k, v));
+        keybindsList.add(bindMap);
+    }
+
+    let userMap = new HashMap();
+    userMap.put("unbindInstallerJs", user.unbindInstallerJs);
+    userMap.put("deleteInstallerJs", user.deleteInstallerJs);
+
+    let libs = new ArrayList();
+    dev.externalLibraries.forEach(lib => libs.add(lib));
+
+    let map = new HashMap();
+    map.put("github", dev.github);
+    map.put("libs", libs);
+    map.put("keybinds", keybindsList);
+    map.put("user", userMap);
+
+    GlobalVars.putObject("LuaJConfiguration", map);
+};
+
 if (Installer.lua()) {
     Installer.editConfig();
-        GlobalVars.putBoolean("unbindInstallerJs",options.unbindInstallerJs);
-        GlobalVars.putBoolean("deleteInstallerJs",options.deleteInstallerJs);
-    Installer.runLuaSetup()
+    Installer.LuaJConfiguration();
+    Installer.runLuaJSetup()
 }
   
    
