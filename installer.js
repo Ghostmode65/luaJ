@@ -15,12 +15,12 @@ const lua = {
 const dev = {
     github: "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.1.0/", //Change this to your github raw url
 
-    externalLibraries: [//Add the libraries or scripts you want to download and execute automatically here
-
+    externalLibraries: [//Add the libraries or scripts you want to download and execute automatically here 
+        //"https://raw.github.com/example/repo/path/to/file.lua"
     ],
 
     keybinds: {
-        example: {filepath: "installer.js", event: "keydown", key: "keyboard.key.4" },
+        //example: {filepath: "installer.js", event: "keydown", key: "keyboard.key.4" },
     },
 };
 
