@@ -100,6 +100,10 @@ Installer.LuaJConfiguration = () => {
         keybindsList.add(bindMap);
     }
 
+    let userMap = new HashMap();
+    userMap.put("unbindInstallerJs", user.unbindInstallerJs);
+    userMap.put("deleteInstallerJs", user.deleteInstallerJs);
+
     let libs = new ArrayList();
     dev.externalLibraries.forEach(lib => libs.add(lib));
 
@@ -107,6 +111,7 @@ Installer.LuaJConfiguration = () => {
     map.put("github", dev.github);
     map.put("libs", libs);
     map.put("keybinds", keybindsList);
+    map.put("user", userMap);
 
     GlobalVars.putObject("LuaJConfiguration", map);
 };
