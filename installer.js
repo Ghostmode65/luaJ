@@ -13,9 +13,9 @@ const lua = {
 };
 
 const dev = {
-    github: "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.1.0/", //Change this to your github raw url
+    github: "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.2.0/", //If your forking Change this to your github raw url
 
-    externalLibraries: [//Add the libraries or scripts you want to download and execute automatically here 
+    ExternalLibraries: [//Add the libraries or scripts you want to download and execute automatically here 
         //"https://raw.github.com/example/repo/path/to/file.lua"
     ],
 
@@ -105,7 +105,7 @@ Installer.LuaJConfiguration = () => {
     userMap.put("deleteInstallerJs", user.deleteInstallerJs);
 
     let libs = new ArrayList();
-    dev.externalLibraries.forEach(lib => libs.add(lib));
+    dev.ExternalLibraries.forEach(lib => libs.add(lib));
 
     let map = new HashMap();
     map.put("github", dev.github);
