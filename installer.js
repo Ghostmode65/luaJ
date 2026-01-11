@@ -13,7 +13,7 @@ const lua = {
 };
 
 const dev = {
-    github: "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.2.0/", //If your forking Change this to your github raw url
+    github: "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.2.1/", //If your forking Change this to your github raw url
 
     ExternalLibraries: [//Add the libraries or scripts you want to download and execute automatically here 
         //"https://raw.github.com/example/repo/path/to/file.lua"
