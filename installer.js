@@ -1,11 +1,11 @@
-//Installer options for anyone
+//Installer settings for anyone
 const user = {
     unbindInstallerJs: true, //Unbind installer.js after install
     deleteInstallerJs: false, //Delete installer.js after install
 };
 
 
-//Config settings for developers
+//Installer settings for developers
 const lua = {
     url: "https://github.com/JsMacros/JsMacros-Lua/releases/download/1.2.2/",
     version: "jsmacros-lua-1.2.2.jar",

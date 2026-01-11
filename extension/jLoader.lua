@@ -10,6 +10,8 @@ LuaJ.directory = LuaJ.directory or  {
         library = roaming.. "/.jsMacros/scripts/library/",
         extensions = roaming.. "/.jsMacros/scripts/extensions/",
         macros = roaming.. "/.jsMacros/scripts/Macros/",
+        scripts = roaming.. "/.jsMacros/scripts/",
+        plugins = roaming.. "/.jsMacros/scripts/plugins/",
     },
     config = {
         folder = configFolder,
@@ -55,10 +57,10 @@ LuaJ.loadLibraries = LuaJ.loadLibraries or function()
     end
 
     library.nest = function(folder)
-        local files = FS:list(LuaJ.directory.roaming.library.."/"..folder)
+        local files = FS:list(LuaJ.directory.roaming.library..folder)
         if not files then return nil end
         for _,filename in pairs(files) do
-            local path = LuaJ.directory.roaming.library.."/"..folder.."/"
+            local path = LuaJ.directory.roaming.library..folder.."/"
             if filename:sub(-4) == ".lua" then loadfile(path, filename)
                 elseif FS:isDir(path..filename) then --does this gurantee it's a folder?
             library.nest(folder.."/"..filename) end
@@ -66,9 +68,8 @@ LuaJ.loadLibraries = LuaJ.loadLibraries or function()
     end
 
    library.main = function()
-        local files = FS:list(LuaJ.directory.roaming.library.."/main/") or {}
-        for _,filename in pairs(files) do
-            library.nest("main/"..filename)
+        for i, folder in pairs(folders) do
+            if folder == "main" then library.nest(folder) break end
         end
    end
 
