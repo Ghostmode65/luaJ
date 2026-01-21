@@ -41,12 +41,14 @@ end
 
 Import.download = function(url, saveDirectory, overwrite) --*.jsMacros/saveDirectory/github filename or config/saveDirectory/github filename
     local valid = pcall(function() Request:create(url):get() return true end)
-    if not valid then Chat:log("Invalid URL".."\n§d"..url) return nil end
+    if not valid then Chat:log("Invalid URL".."\n§d"..tostring(url)) return nil end
+
+    if not saveDirectory then saveDirectory = "scripts/macros/" end
 
     local dir
     if type(saveDirectory) == "string" then
         dir = LuaJ.directory.roaming[".jsMacros"]..(saveDirectory or "")
-    else
+    elseif type(saveDirectory) == "table" then
         dir = LuaJ.directory.config.macros..(saveDirectory[1] or "")
     end
     

@@ -46,7 +46,7 @@ local function download()
     for _, v in pairs(LuaJ.setup["External Library"]) do
         if v.folder then
             if v.folder:sub(-1) ~= "/" then v.folder = v.folder .. "/" end
-            if v:match("%.lua$") then Chat:log("§cExternal Library: "..tostring(v.folder).. " is not a valid folder name.") return false end
+            if v.folder:match("%.lua$") then Chat:log("§cExternal Library: "..tostring(v.folder).. " is not a valid folder name.") return false end
         end
         pcall(function() Import.download(v.url, "scripts/library/"..v.folder,false) end)
     end

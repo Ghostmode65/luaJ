@@ -17,7 +17,7 @@ const settings = {
         },
 
         keybinds: {
-            //example: {filepath: "installer.js", event: "keydown", key: "keyboard.key.4", url: "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/heads/main/debug/request.lua"},
+            //example: {event: "keydown", key: "key.keyboard.keypad.8", url: "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/heads/main/debug/request.lua"},
         },
     },
 

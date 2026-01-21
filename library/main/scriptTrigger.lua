@@ -11,7 +11,7 @@ local ScriptTrigger = Reflection:getClass("xyz.wagyourtail.jsmacros.core.config.
 local TriggerType = Reflection:getClass("xyz.wagyourtail.jsmacros.core.config.ScriptTrigger$TriggerType")
 
 local dir = io.open(LuaJ.directory.config.macros..file)
-if not dir then return nil else dir:close() end
+if not dir then Chat:log("§cScriptTrigger: Directory does not exist: "..dir) return nil else dir:close() end
 
 local trigger = Reflection:newInstance(
     ScriptTrigger,
