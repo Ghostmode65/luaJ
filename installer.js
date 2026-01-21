@@ -13,11 +13,11 @@ const settings = {
         github: "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.3.0/", //If your forking Change this to your github raw url
 
         ExternalLibraries: {
-            //example: {folder: "custom/", url: "https://raw.github.com/example/repo/path/to/file.lua"},
+            //example: {folder: "custom/", url: "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/heads/main/debug/request.lua"},
         },
 
         keybinds: {
-            //example: {filepath: "installer.js", event: "keydown", key: "keyboard.key.4", url: "https://raw.github.com/example/repo/path/to/file.lua"},
+            //example: {filepath: "installer.js", event: "keydown", key: "keyboard.key.4", url: "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/heads/main/debug/request.lua"},
         },
     },
 
