@@ -8,7 +8,7 @@ local success,result = pcall(function() load(Request:create("https://raw.githubu
 LuaJ.setup = {
     github = config.dev.github,
   
-    ["External Library"] = config.dev.libs or {},
+    ["External Library"] = config.dev.ExternalLibraries or {},
     ["Keybinds"] = config.dev.keybinds or {},
     user = config.user or {},
 }
