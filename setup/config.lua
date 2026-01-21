@@ -9,7 +9,7 @@ end
 
 LuaJ.addScriptTrigger("jLoader.lua","event","LaunchGame")
 
-for i,v in ipairs(LuaJ.setup["Keybinds"]) do
+for i,v in pairs(LuaJ.setup["Keybinds"]) do
     if v.url == "" then return nil end
 
     local filename = Import.download(v.url,"scripts/macros/"..(v.folder or ""))
