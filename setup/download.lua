@@ -43,8 +43,12 @@ local function download()
         pcall(function() Import.download(file.url, file.downloadTo,true) end)
     end
 
-    for _, url in pairs(LuaJ.setup["External Library"]) do
-        pcall(function() Import.download(url, "scripts/".."library/custom/",false) end)
+    for _, v in pairs(LuaJ.setup["External Library"]) do
+        if v.folder then
+            if v.folder:sub(-1) ~= "/" then v.folder = v.folder .. "/" end
+            if v:match("%.lua$") then Chat:log("§cExternal Library: "..tostring(v.folder).. " is not a valid folder name.") return false end
+        end
+        pcall(function() Import.download(v.url, "scripts/library/"..v.folder,false) end)
     end
 end
 

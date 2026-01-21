@@ -113,4 +113,4 @@ function Json.encode(tbl)
   return ( encode(tbl) )
 end
 
-
+return Json

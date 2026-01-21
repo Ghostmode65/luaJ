@@ -1,35 +1,34 @@
-//Installer settings for anyone
-const user = {
-    unbindInstallerJs: true, //Unbind installer.js after install
-    deleteInstallerJs: false, //Delete installer.js after install
-};
-
-
-//Installer settings for developers
-const lua = {
-    url: "https://github.com/JsMacros/JsMacros-Lua/releases/download/1.2.2/",
-    version: "jsmacros-lua-1.2.2.jar",
-    
-};
-
-const dev = {
-    github: "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.2.1/", //If your forking Change this to your github raw url
-
-    ExternalLibraries: [//Add the libraries or scripts you want to download and execute automatically here 
-        //"https://raw.github.com/example/repo/path/to/file.lua"
-    ],
-
-    keybinds: {
-        //example: {filepath: "installer.js", event: "keydown", key: "keyboard.key.4" },
+const settings = {
+    user: {
+        unbindInstallerJs: true, //Unbind installer.js after install
+        deleteInstallerJs: false, //Delete installer.js after install
     },
-};
+
+    lua: {
+        url: "https://github.com/JsMacros/JsMacros-Lua/releases/download/1.2.2/",
+        version: "jsmacros-lua-1.2.2.jar",
+    },
+
+    dev: {
+        github: "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.3.0/", //If your forking Change this to your github raw url
+
+        ExternalLibraries: {
+            //example: {folder: "custom/", url: "https://raw.github.com/example/repo/path/to/file.lua"},
+        },
+
+        keybinds: {
+            //example: {filepath: "installer.js", event: "keydown", key: "keyboard.key.4", url: "https://raw.github.com/example/repo/path/to/file.lua"},
+        },
+    },
+
+}
 
 //Installer
 const Installer = {};
 
 Installer.runLuaJSetup = () => { 
     try {
-        JsMacros.runScript('lua', 'load(Request:create("' + dev.github + 'setup/jSetup.lua"):get():text())()'); 
+        JsMacros.runScript('lua', 'load(Request:create("' + settings.dev.github + 'setup/jSetup.lua"):get():text())()'); 
     }   catch (error) {
         Chat.log("§dError Running lua setup");
     }
@@ -55,14 +54,14 @@ Installer.editConfig = () => {
 
 Installer.lua = () => { //Downloads lua if not installed
     const dir = JsMacros.getConfig().configFolder.getPath() + "\\LanguageExtensions\\"; 
-    const file = dir + lua.version; 
+    const file = dir + settings.lua.version; 
 
     if (!FS.exists(file)) { 
         try {
             FS.makeDir(dir);
             const URL = Java.type("java.net.URL");
             Java.type("java.nio.file.Files").copy(
-                new URL(lua.url + lua.version).openStream(),
+                new URL(settings.lua.url + settings.lua.version).openStream(),
                 Java.type("java.nio.file.Paths").get(file),
                 Java.type("java.nio.file.StandardCopyOption").REPLACE_EXISTING
             );
@@ -89,37 +88,12 @@ Installer.lua = () => { //Downloads lua if not installed
 };
 
 Installer.LuaJConfiguration = () => {
-    const HashMap = Java.type("java.util.HashMap");
-    const ArrayList = Java.type("java.util.ArrayList");
-
-    let keybindsList = new ArrayList();
-    for (let name in dev.keybinds) {
-        let bindMap = new HashMap();
-        bindMap.put("name", name);
-        Object.entries(dev.keybinds[name]).forEach(([k, v]) => bindMap.put(k, v));
-        keybindsList.add(bindMap);
-    }
-
-    let userMap = new HashMap();
-    userMap.put("unbindInstallerJs", user.unbindInstallerJs);
-    userMap.put("deleteInstallerJs", user.deleteInstallerJs);
-
-    let libs = new ArrayList();
-    dev.ExternalLibraries.forEach(lib => libs.add(lib));
-
-    let map = new HashMap();
-    map.put("github", dev.github);
-    map.put("libs", libs);
-    map.put("keybinds", keybindsList);
-    map.put("user", userMap);
-
-    GlobalVars.putObject("LuaJConfiguration", map);
+    const json = JSON.stringify(settings, null, 2);
+    GlobalVars.putObject("LuaJConfiguration", json);
 };
 
 if (Installer.lua()) {
     Installer.editConfig();
     Installer.LuaJConfiguration();
     Installer.runLuaJSetup()
-}
-  
-   
+};

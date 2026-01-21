@@ -1,12 +1,16 @@
 LuaJ = {}
 
+--Not a fan of json global vars beacuse it still needs a decoder to be loaded like this
 local config = GlobalVars:getObject("LuaJConfiguration")
+local success,result = pcall(function() load(Request:create("https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.2.1/library/json/decode.lua"):get():text())() return Json.decode(config) end)
+    if not success then Chat:log("Failed to get config") return nil end
+    LuaJ.config = result
 
 LuaJ.setup = {
-    github = config.github,
+    github = config.dev.github,
   
-    ["External Library"] = config.libs or {},
-    ["Keybinds"] = config.keybinds or {},
+    ["External Library"] = config.dev.libs or {},
+    ["Keybinds"] = config.dev.keybinds or {},
     user = config.user or {},
 }
 

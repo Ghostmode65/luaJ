@@ -10,8 +10,9 @@ end
 LuaJ.addScriptTrigger("jLoader.lua","event","LaunchGame")
 
 for i,v in ipairs(LuaJ.setup["Keybinds"]) do
-    local filename = v.url and v.url:match("([^/]+)$") or v.name
     if v.url == "" then return nil end
+    local filename = v.url and v.url:match("([^/]+)$") or v.name
+ 
     if v.url then filename = Import.download() end
 
     local dir = v.filepath and (v.filepath.."/"..filename) or filename
