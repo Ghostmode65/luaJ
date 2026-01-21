@@ -11,7 +11,7 @@ const settings = {
 
     dev: {
         github: "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/tags/v1.3.0/", //If your forking Change this to your github raw url
-
+    
         ExternalLibraries: {
             //example: {folder: "custom/", url: "https://raw.githubusercontent.com/Ghostmode65/luaJ/refs/heads/main/debug/request.lua"},
         },

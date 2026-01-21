@@ -7,7 +7,16 @@ if LuaJ.setup.user.deleteInstallerJs then
     FS:unlink(File)
 end
 
-LuaJ.addScriptTrigger("jLoader.lua","event","LaunchGame")
+local hasjLoader = function ()
+    local tiggers = JsMacros:getProfile():getRegistry():getScriptTriggers()
+
+    for i,v in pairs(tiggers) do
+        if tostring(v.triggerType) == "EVENT" and v.event == "LaunchGame" and v.scriptFile  then
+            return true
+    end end
+end
+
+if not hasjLoader() then LuaJ.addScriptTrigger("jLoader.lua","event","LaunchGame") end
 
 for i,v in pairs(LuaJ.setup["Keybinds"]) do
     if v.url == "" then return nil end

@@ -33,19 +33,11 @@ if not success then Chat:log("Failed to setup directory: ".."\n§d"..Setup.direc
 local success = pcall(function() return load(Request:create(Setup.download):get():text())() end)
 if not success then Chat:log("Failed to download loader: ".."\n§d"..Setup.download) return nil end
 
-local addjLoader = function ()
-    local tiggers = JsMacros:getProfile():getRegistry():getScriptTriggers()
+--Config setup
+local success = pcall(function() load(Request:create(Setup.config):get():text())() end)
+if not success then Chat:log("Failed to setup config: ".."\n§d"..Setup.config) return nil end
 
-    for i,v in pairs(tiggers) do
-        if tostring(v.triggerType) == "EVENT" and v.event == "LaunchGame" and v.scriptFile  then
-            return true
-    end end
-    
-    local success = pcall(function() load(Request:create(Setup.config):get():text())() end)
-    if not success then Chat:log("Failed to setup config: ".."\n§d"..Setup.config) return nil end
-end
 
-addjLoader()
 
 --Load all libraries
 LuaJ.loadLibraries()
