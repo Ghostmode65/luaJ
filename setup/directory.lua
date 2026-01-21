@@ -32,8 +32,6 @@ directory.setupFolders = function()
     makeDirectories(dirc)
 end
 
-
-
 local status, err = pcall(directory.setupFolders)
 if not status then Chat:log("§cError setting up folders") end
 

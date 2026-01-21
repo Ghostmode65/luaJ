@@ -37,8 +37,6 @@ if not success then Chat:log("Failed to download loader: ".."\n§d"..Setup.downl
 local success = pcall(function() load(Request:create(Setup.config):get():text())() end)
 if not success then Chat:log("Failed to setup config: ".."\n§d"..Setup.config) return nil end
 
-
-
 --Load all libraries
 LuaJ.loadLibraries()
 LuaJ.setup = nil
