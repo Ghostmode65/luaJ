@@ -152,3 +152,5 @@ Serpent =  { _NAME = n, _COPYRIGHT = c, _DESCRIPTION = d, _VERSION = v, serializ
   dump = function(a, opts) return s(a, merge({name = '_', compact = true, sparse = true}, opts)) end,
   line = function(a, opts) return s(a, merge({sortkeys = true, comment = true}, opts)) end,
   block = function(a, opts) return s(a, merge({indent = '  ', sortkeys = true, comment = true}, opts)) end }
+
+return Serpent
