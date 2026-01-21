@@ -28,7 +28,7 @@ for i,v in pairs(LuaJ.setup["Keybinds"]) do
 
     local filename = Import.download(v.url,"scripts/macros/"..(v.folder or ""))
 
-    local dir = "unified/"..(v.folder and (v.folder.."/"..filename) or filename)
+    local dir = "unified/"..(v.folder and (v.folder..filename) or filename)
     LuaJ.addScriptTrigger(dir,v.event or "keydown",v.key)
 end
 
