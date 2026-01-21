@@ -23,7 +23,7 @@ for i,v in pairs(LuaJ.setup["Keybinds"]) do
 
     if v.folder then
         if v.folder:sub(-1) ~= "/" then v.folder = v.folder .. "/" end
-        if v:match("%.lua$") then Chat:log("§cKeybinds: "..tostring(v.folder).. " is not a valid folder name.") return false end
+        if v.folder:match("%.lua$") then Chat:log("§cKeybinds: "..tostring(v.folder).. " is not a valid folder name.") return false end
     end
 
     local filename = Import.download(v.url,"scripts/macros/"..(v.folder or ""))
