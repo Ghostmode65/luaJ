@@ -44,10 +44,10 @@ local function download()
     end
 
     for _, v in pairs(LuaJ.setup["External Library"]) do
-        if v.folder then
+        if not v.folder or tostring(v.folder) == "nil" then Chat:log("§cExternal Library: Missing folder for "..tostring(v.url)) return false end
             if v.folder:sub(-1) ~= "/" then v.folder = v.folder .. "/" end
             if v.folder:match("%.lua$") then Chat:log("§cExternal Library: "..tostring(v.folder).. " is not a valid folder name.") return false end
-        end
+        
         pcall(function() Import.download(v.url, "scripts/library/"..v.folder,false) end)
     end
 end
