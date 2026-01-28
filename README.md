@@ -12,8 +12,8 @@ Easily setup up Lua with 1 script no matter the instance.
 
 **Installing**<br>
 On Jsmacros with lua extension support copy the the `installer.js` code and run the script.<br>
-• `installer.js` will automatically install lua and close the game.
-• Running `installer.js` with lua installed will install LuaJ
+• `installer.js` will automatically install lua and close the game. <br>
+• Running `installer.js` with lua installed will install LuaJ <br>
 
 **Shared folder**<br>
 Shared folder is created in `roaming/.jsMacros/`
